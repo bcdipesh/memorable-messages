@@ -33,7 +33,7 @@ def get_users():
                 access_token:
                   type: string
       401:
-        description: Unauthorized access.
+        description: Unauthorized.
         content:
           application/json:
             schema:
@@ -47,7 +47,7 @@ def get_users():
       - JWT: []
     """
 
-    if current_user.isAdmin:
+    if current_user.is_admin:
         users = db.session.scalars(sa.select(User)).all()
 
         return {"users": [user.to_dict(include_email=True) for user in users]}
@@ -78,7 +78,7 @@ def delete_user(id):
       204:
         description: Successfully deleted.
       401:
-        description: Unauthorized access.
+        description: Unauthorized.
         content:
           application/json:
             schema:
@@ -103,7 +103,7 @@ def delete_user(id):
       - JWT: []
     """
 
-    if id == current_user.id or current_user.isAdmin:
+    if id == current_user.id or current_user.is_admin:
         user = db.get_or_404(User, id)
         db.session.delete(user)
         db.session.commit()
@@ -168,7 +168,7 @@ def get_user(id):
       - JWT: []
     """
 
-    if current_user.id == id or current_user.isAdmin:
+    if current_user.id == id or current_user.is_admin:
         return db.get_or_404(User, id).to_dict(include_email=True)
 
     return db.get_or_404(User, id).to_dict()
@@ -242,7 +242,7 @@ def update_user(id):
     user = db.get_or_404(User, id)
     data = request.get_json()
 
-    if id == current_user.id or current_user.isAdmin:
+    if id == current_user.id or current_user.is_admin:
         if (
             "username" in data
             and data["username"] != user.username
@@ -323,7 +323,7 @@ def user_occasions(id):
       - JWT: []
     """
 
-    if id == current_user.id or current_user.isAdmin:
+    if id == current_user.id or current_user.is_admin:
         user = db.get_or_404(User, id)
         occasions = db.session.scalars(user.occasions.select())
 
@@ -367,6 +367,9 @@ def create_user_occasion(id):
             message_content:
               type: string
               description: The message content that will be sent at the occasion date and time.
+            is_repeated:
+              type: boolean
+              description: Boolean flag to make this occasion repeated.
             date_time:
               type: string
               format: date-time
@@ -418,7 +421,8 @@ def create_user_occasion(id):
       - JWT: []
     """
 
-    if id == current_user.id or current_user.isAdmin:
+    if id == current_user.id or current_user.is_admin:
+        db.get_or_404(User, id)
         data = request.get_json()
 
         if (

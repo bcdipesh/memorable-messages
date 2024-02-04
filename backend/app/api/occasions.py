@@ -45,7 +45,7 @@ def get_occasions():
       - JWT: []
     """
 
-    if current_user.isAdmin:
+    if current_user.is_admin:
         occasions = db.session.scalars(sa.select(Occasion)).all()
 
         return {
@@ -53,6 +53,65 @@ def get_occasions():
                 occasion.to_dict(include_message_content=True) for occasion in occasions
             ]
         }
+
+    return error_response(
+        401, "you do not have the necessary authorization for this action/resource"
+    )
+
+
+@bp.route("/occasions/<int:id>", methods=["DELETE"])
+@jwt_required()
+def delete_occasion(id):
+    """
+    Delete a occasion.
+
+    This endpoint deletes a occasion with the provided id.
+
+    ---
+    tags:
+      - Occasions
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: The id of the occasion.
+    responses:
+      204:
+        description: Successfully deleted.
+      401:
+        description: Unauthorized.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+      404:
+        description: Not found.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+    security:
+      - JWT: []
+    """
+
+    occasion = db.get_or_404(Occasion, id)
+
+    if occasion.user_id == current_user.id or current_user.is_admin:
+        db.session.delete(occasion)
+        db.session.commit()
+
+        return {}, 204
 
     return error_response(
         401, "you do not have the necessary authorization for this action/resource"

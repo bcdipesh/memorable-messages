@@ -16,7 +16,7 @@ class User(db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.String(64), unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
-    isAdmin: so.Mapped[bool] = so.mapped_column(server_default=sa.text("false"))
+    is_admin: so.Mapped[bool] = so.mapped_column(server_default=sa.text("false"))
     created_at: so.Mapped[datetime] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc)
     )
@@ -38,7 +38,7 @@ class User(db.Model):
         data = {
             "id": self.id,
             "username": self.username,
-            "isAdmin": self.isAdmin,
+            "is_admin": self.is_admin,
             "created_at": self.created_at,
         }
 
@@ -48,7 +48,7 @@ class User(db.Model):
         return data
 
     def from_dict(self, data, new_user=False):
-        for field in ["username", "email", "isAdmin"]:
+        for field in ["username", "email", "is_admin"]:
             if field in data:
                 setattr(self, field, data[field])
             if new_user and "password" in data:
@@ -74,6 +74,7 @@ class Occasion(db.Model):
     delivery_method: so.Mapped[str] = so.mapped_column(sa.String(64))
     occasion_type: so.Mapped[str] = so.mapped_column(sa.String(256))
     message_content: so.Mapped[str] = so.mapped_column(sa.Text())
+    is_repeated: so.Mapped[bool] = so.mapped_column(server_default=sa.text("false"))
     date_time: so.Mapped[datetime] = so.mapped_column(sa.DateTime())
     created_at: so.Mapped[datetime] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc)
@@ -92,6 +93,7 @@ class Occasion(db.Model):
             "id": self.id,
             "delivery_method": self.delivery_method,
             "occasion_type": self.occasion_type,
+            "is_repeated": self.is_repeated,
             "date_time": self.date_time,
             "created_at": self.created_at,
         }
@@ -106,6 +108,7 @@ class Occasion(db.Model):
             "user_id",
             "delivery_method",
             "occasion_type",
+            "is_repeated",
             "message_content",
             "date_time",
         ]:
