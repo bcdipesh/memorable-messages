@@ -1,10 +1,14 @@
-from flask import Flask
 from config import Config
-from flask_sqlalchemy import SQLAlchemy
+from flasgger import Swagger
+from flask import Flask
+from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 migrate = Migrate()
+jwt = JWTManager()
+swagger = Swagger()
 
 
 def create_app(config_class=Config):
@@ -13,9 +17,11 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    jwt.init_app(app)
+    swagger.init_app(app)
 
-    from app.errors import bp as errors_bp
     from app.api import bp as api_bp
+    from app.errors import bp as errors_bp
 
     app.register_blueprint(errors_bp)
     app.register_blueprint(api_bp, url_prefix="/api/v1")
