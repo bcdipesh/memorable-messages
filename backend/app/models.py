@@ -91,6 +91,7 @@ class Occasion(db.Model):
     def to_dict(self, include_message_content=False):
         data = {
             "id": self.id,
+            "user_id": self.user_id,
             "delivery_method": self.delivery_method,
             "occasion_type": self.occasion_type,
             "is_repeated": self.is_repeated,
@@ -130,3 +131,13 @@ class DeliveryHistory(db.Model):
 
     def __repr__(self):
         return f"<DeliveryHistory {self.status}>"
+
+    def to_dict(self):
+        data = {
+            "id": self.id,
+            "occasion_id": self.occasion_id,
+            "status": self.status,
+            "timestamp": self.timestamp,
+        }
+
+        return data
