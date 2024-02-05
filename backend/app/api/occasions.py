@@ -116,3 +116,156 @@ def delete_occasion(id):
     return error_response(
         401, "you do not have the necessary authorization for this action/resource"
     )
+
+
+@bp.route("/occasions/<int:id>", methods=["GET"])
+@jwt_required()
+def get_occasion(id):
+    """
+    Get a occasion by id.
+
+    This endpoint returns the details of the occasion with the provided id.
+
+    ---
+    tags:
+      - Occasions
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: The id of the occasion.
+    responses:
+      200:
+        description: A successful response with the occasion details.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                occasion:
+                  type: object
+      401:
+        description: Unauthorized.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+      404:
+        description: Not found.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+    security:
+      - JWT: []
+    """
+
+    occasion = db.get_or_404(Occasion, id)
+
+    if occasion.user_id == current_user.id or current_user.is_admin:
+        return {"occasion": occasion.to_dict(include_message_content=True)}
+
+    return error_response(
+        401, "you do not have the necessary authorization for this action/resource"
+    )
+
+
+@bp.route("/occasions/<int:id>", methods=["PUT"])
+@jwt_required()
+def update_occasion(id):
+    """
+    Update a occasion by id.
+
+    This endpoint updates the occasion and returns the updated occasion details.
+
+    ---
+    tags:
+      - Occasions
+    parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+        description: The id of the occasion.
+      - name: occasion_details
+        in: body
+        description: The new details for the occasion.
+        schema:
+          type: object
+          properties:
+            delivery_method:
+              type: string
+              description:  new delivery method of the occasion message.
+            occasion_type:
+              type: string
+              description: The new type of the occasion.
+            message_content:
+              type: string
+              description: The new message content that will be sent at the occasion date and time.
+            is_repeated:
+              type: boolean
+              description: The new boolean flag to make this occasion repeated.
+            date_time:
+              type: string
+              format: date-time
+              description: The new date and time of the occasion.
+    responses:
+      200:
+        description: A successful response with the updated occasion details.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                occasion:
+                  type: object
+      401:
+        description: Unauthorized.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+      404:
+        description: Not found.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+    security:
+      - JWT: []
+    """
+
+    occasion = db.get_or_404(Occasion, id)
+
+    if occasion.user_id == current_user.id or current_user.is_admin:
+        data = request.get_json()
+
+        occasion.from_dict(data)
+        db.session.commit()
+
+        return {"occasion": occasion.to_dict(include_message_content=True)}
+
+    return error_response(
+        401, "you do not have the necessary authorization for this action/resource"
+    )

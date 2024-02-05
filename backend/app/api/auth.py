@@ -2,9 +2,10 @@ import sqlalchemy as sa
 from app import db
 from app.api import bp
 from app.api.errors import bad_request, error_response
+from app.email import send_password_reset_email
 from app.models import User
 from flask import request
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, decode_token
 
 
 @bp.route("/auth/register", methods=["POST"])
@@ -78,8 +79,8 @@ def register_user():
     return {"user": user.to_dict(include_email=True), "access_token": access_token}, 201
 
 
-@bp.route("/auth/token", methods=["POST"])
-def get_token():
+@bp.route("/auth/login", methods=["POST"])
+def login():
     """
     User login.
 
@@ -138,3 +139,140 @@ def get_token():
     access_token = create_access_token(identity=user)
 
     return {"access_token": access_token}, 200
+
+
+@bp.route("/auth/reset-password/request", methods=["POST"])
+def reset_password():
+    """
+    Reset user password.
+
+    This endpoint generates a JWT token and emails it to your email address which can be used to reset your current password.
+
+    ---
+    tags:
+      - Auth
+    parameters:
+      - name: email
+        in: body
+        required: true
+        description: The email registered in the app.
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+              description: The email registered in the app.
+    responses:
+      204:
+        description: Email sent successful.
+      401:
+        description: Unauthorized access.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+      404:
+        description: Not found.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+    """
+
+    data = request.get_json()
+
+    if "email" not in data:
+        return bad_request("must include email field")
+
+    user = db.session.scalar(sa.select(User).where(User.email == data["email"]))
+
+    if user is None:
+        return error_response(404, "Not found")
+
+    token = create_access_token(identity=user)
+    send_password_reset_email(token=token, user=user)
+
+    return {}, 204
+
+
+@bp.route("/auth/reset-password", methods=["PUT"])
+def update_password():
+    """
+    Update user password.
+
+    This endpoint verifies the reset password token and updates the user password with the provided password.
+
+    ---
+    tags:
+      - Auth
+    parameters:
+      - name: password
+        in: body
+        required: true
+        description: The new password of the user.
+        schema:
+          type: object
+          properties:
+            token:
+              type: string
+              description: The password reset token received in email
+            password:
+              type: string
+              description: The password for authentication.
+    responses:
+      204:
+        description: Password successfully updated.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+      400:
+        description: Bad request.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+      401:
+        description: Unauthorized access.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+                message:
+                  type: string
+    """
+
+    data = request.get_json()
+
+    if "token" not in data or "password" not in data:
+        return bad_request("token and password field must be included")
+
+    decoded_token = decode_token(data["token"])
+
+    user = db.get_or_404(User, decoded_token["sub"])
+
+    user.set_password(data["password"])
+    db.session.commit()
+
+    return {}, 204
