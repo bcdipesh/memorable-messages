@@ -40,7 +40,7 @@ def schedule_email(occasion, action="CREATE"):
                 occasion.message_content,
             ],
             id=job_id,
-            misfire_grace_time=60,
+            misfire_grace_time=86400,
         )
     else:
         scheduler.add_job(
@@ -56,5 +56,5 @@ def schedule_email(occasion, action="CREATE"):
                 occasion.message_content,
             ],
             id=job_id,
-            misfire_grace_time=60,
+            misfire_grace_time=86400,
         )
