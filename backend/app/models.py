@@ -18,7 +18,7 @@ class User(db.Model):
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     is_admin: so.Mapped[bool] = so.mapped_column(server_default=sa.text("false"))
     created_at: so.Mapped[datetime] = so.mapped_column(
-        default=lambda: datetime.now(timezone.utc)
+        default=lambda: datetime.now(timezone.utc), type_=sa.DateTime(timezone=True)
     )
 
     occasions: so.WriteOnlyMapped["Occasion"] = so.relationship(
@@ -70,14 +70,16 @@ class Occasion(db.Model):
     __tablename__ = "occasions"
 
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id))
+    user_id: so.Mapped[int] = so.mapped_column(
+        sa.ForeignKey(User.id, ondelete="cascade")
+    )
     delivery_method: so.Mapped[str] = so.mapped_column(sa.String(64))
     occasion_type: so.Mapped[str] = so.mapped_column(sa.String(256))
     message_content: so.Mapped[str] = so.mapped_column(sa.Text())
     is_repeated: so.Mapped[bool] = so.mapped_column(server_default=sa.text("false"))
-    date_time: so.Mapped[datetime] = so.mapped_column(sa.DateTime())
+    date_time: so.Mapped[datetime] = so.mapped_column(sa.DateTime(timezone=True))
     created_at: so.Mapped[datetime] = so.mapped_column(
-        default=lambda: datetime.now(timezone.utc)
+        default=lambda: datetime.now(timezone.utc), type_=sa.DateTime(timezone=True)
     )
 
     user: so.Mapped[User] = so.relationship(back_populates="occasions")
@@ -121,10 +123,12 @@ class DeliveryHistory(db.Model):
     __tablename__ = "delivery_histories"
 
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    occasion_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Occasion.id))
+    occasion_id: so.Mapped[int] = so.mapped_column(
+        sa.ForeignKey(Occasion.id, ondelete="cascade")
+    )
     status: so.Mapped[str] = so.mapped_column(sa.String(64))
     timestamp: so.Mapped[datetime] = so.mapped_column(
-        default=lambda: datetime.now(timezone.utc)
+        default=lambda: datetime.now(timezone.utc), type_=sa.DateTime(timezone=True)
     )
 
     occasion: so.Mapped[Occasion] = so.relationship(back_populates="delivery_histories")
@@ -139,5 +143,12 @@ class DeliveryHistory(db.Model):
             "status": self.status,
             "timestamp": self.timestamp,
         }
+
+        return data
+
+    def from_dict(self, data):
+        for field in ["occasion_id", "status"]:
+            if field in data:
+                setattr(self, field, data[field])
 
         return data

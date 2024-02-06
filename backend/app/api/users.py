@@ -2,6 +2,7 @@ import sqlalchemy as sa
 from app import db
 from app.api import bp
 from app.api.errors import bad_request, error_response
+from app.email import schedule_email
 from app.models import Occasion, User
 from flask import request
 from flask_jwt_extended import current_user, jwt_required
@@ -440,5 +441,7 @@ def create_user_occasion(id):
         occasion.from_dict(data)
         db.session.add(occasion)
         db.session.commit()
+
+        schedule_email(occasion=occasion)
 
         return {"occasion": occasion.to_dict(include_message_content=True)}, 201

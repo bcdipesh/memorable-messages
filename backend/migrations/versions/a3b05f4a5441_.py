@@ -1,8 +1,8 @@
-"""Create users, occasions and delivery_histories table
+"""empty message
 
-Revision ID: 77e8aaa10301
+Revision ID: a3b05f4a5441
 Revises: 
-Create Date: 2024-01-30 11:28:48.735564
+Create Date: 2024-02-06 16:36:52.994467
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '77e8aaa10301'
+revision = 'a3b05f4a5441'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,8 @@ def upgrade():
     sa.Column('username', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password_hash', sa.String(length=256), nullable=True),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('is_admin', sa.Boolean(), server_default=sa.text('false'), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -34,17 +35,18 @@ def upgrade():
     sa.Column('delivery_method', sa.String(length=64), nullable=False),
     sa.Column('occasion_type', sa.String(length=256), nullable=False),
     sa.Column('message_content', sa.Text(), nullable=False),
-    sa.Column('date_time', sa.DateTime(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.Column('is_repeated', sa.Boolean(), server_default=sa.text('false'), nullable=False),
+    sa.Column('date_time', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='cascade'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('delivery_histories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('occasion_id', sa.Integer(), nullable=False),
     sa.Column('status', sa.String(length=64), nullable=False),
-    sa.Column('timestamp', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['occasion_id'], ['occasions.id'], ),
+    sa.Column('timestamp', sa.DateTime(timezone=True), nullable=False),
+    sa.ForeignKeyConstraint(['occasion_id'], ['occasions.id'], ondelete='cascade'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

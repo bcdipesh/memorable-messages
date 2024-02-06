@@ -2,6 +2,7 @@ import sqlalchemy as sa
 from app import db
 from app.api import bp
 from app.api.errors import bad_request, error_response
+from app.email import schedule_email
 from app.models import DeliveryHistory, Occasion
 from flask import request
 from flask_jwt_extended import current_user, jwt_required
@@ -263,6 +264,8 @@ def update_occasion(id):
 
         occasion.from_dict(data)
         db.session.commit()
+
+        schedule_email(occasion=occasion, action="UPDATE")
 
         return {"occasion": occasion.to_dict(include_message_content=True)}
 
