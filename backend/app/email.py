@@ -1,3 +1,5 @@
+"""Utility functions related to email."""
+
 from app import mail, scheduler
 from flask import current_app, render_template
 from flask_mail import Message

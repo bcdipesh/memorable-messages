@@ -1,3 +1,5 @@
+"""Database models used in the application."""
+
 from datetime import datetime, timezone
 from typing import Optional
 

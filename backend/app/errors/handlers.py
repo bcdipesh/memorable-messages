@@ -1,3 +1,5 @@
+"""Custom error handlers."""
+
 from app import db
 from app.api.errors import error_response as api_error_response
 from app.errors import bp

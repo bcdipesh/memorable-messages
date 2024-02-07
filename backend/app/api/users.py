@@ -1,3 +1,5 @@
+"""users routes."""
+
 import sqlalchemy as sa
 from app import db
 from app.api import bp

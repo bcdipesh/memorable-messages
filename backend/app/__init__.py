@@ -1,3 +1,5 @@
+"""Setting up, importing and initializing other modules."""
+
 from config import Config
 from flasgger import Swagger
 from flask import Flask

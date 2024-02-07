@@ -1,3 +1,5 @@
+"""Custom error handlers for API."""
+
 from app.api import bp
 from werkzeug.exceptions import HTTPException
 from werkzeug.http import HTTP_STATUS_CODES

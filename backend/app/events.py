@@ -1,3 +1,5 @@
+"""Utility functions to respond to certain events emitted by flask-apscheduler."""
+
 from app import db, scheduler
 from app.models import DeliveryHistory
 from apscheduler.events import EVENT_JOB_EXECUTED
