@@ -108,6 +108,12 @@ def delete_user(id):
 
     if id == current_user.id or current_user.is_admin:
         user = db.get_or_404(User, id)
+        occasions = db.session.scalars(user.occasions.select())
+
+        for occasion in occasions:
+            schedule_email(occasion=occasion, action="DELETE")
+            db.session.delete(occasion)
+
         db.session.delete(user)
         db.session.commit()
 
@@ -377,6 +383,12 @@ def create_user_occasion(id):
               type: string
               format: date-time
               description: The date and time of the occasion.
+            receiver_email:
+              type: string
+              description: The email address of the receiver.
+            receiver_phone:
+              type: string
+              description: The phone number of the receiver.
     responses:
       201:
         description: A successful response with the newly created occasion.
@@ -438,12 +450,19 @@ def create_user_occasion(id):
                 "must include delivery_method, occasion_type, message_content and date_time fields"
             )
 
-        data["user_id"] = id
-        occasion = Occasion()
-        occasion.from_dict(data)
-        db.session.add(occasion)
-        db.session.commit()
+        if (
+            data["delivery_method"].lower() == "email"
+            or data["delivery_method"].lower() == "sms"
+        ):
+            data["user_id"] = id
+            occasion = Occasion()
+            occasion.from_dict(data)
+            db.session.add(occasion)
+            db.session.commit()
 
-        schedule_email(occasion=occasion)
+            if occasion.delivery_method.lower() == "email":
+                schedule_email(occasion=occasion)
 
-        return {"occasion": occasion.to_dict(include_message_content=True)}, 201
+            return {"occasion": occasion.to_dict(include_message_content=True)}, 201
+
+        return bad_request("delivery_method must be either email or sms")

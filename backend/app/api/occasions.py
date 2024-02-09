@@ -111,6 +111,7 @@ def delete_occasion(id):
     occasion = db.get_or_404(Occasion, id)
 
     if occasion.user_id == current_user.id or current_user.is_admin:
+        schedule_email(occasion=occasion, action="DELETE")
         db.session.delete(occasion)
         db.session.commit()
 
@@ -223,6 +224,12 @@ def update_occasion(id):
               type: string
               format: date-time
               description: The new date and time of the occasion.
+            receiver_email:
+              type: string
+              description: The new email address of the receiver.
+            receiver_phone:
+              type: string
+              description: The new phone number of the receiver.
     responses:
       200:
         description: A successful response with the updated occasion details.
@@ -264,12 +271,20 @@ def update_occasion(id):
     if occasion.user_id == current_user.id or current_user.is_admin:
         data = request.get_json()
 
-        occasion.from_dict(data)
-        db.session.commit()
+        if "delivery_method" in data:
+            if (
+                data["delivery_method"].lower() == "email"
+                or data["delivery_method"].lower() == "sms"
+            ):
+                occasion.from_dict(data)
+                db.session.commit()
 
-        schedule_email(occasion=occasion, action="UPDATE")
+                if occasion.delivery_method.lower() == "email":
+                    schedule_email(occasion=occasion, action="UPDATE")
 
-        return {"occasion": occasion.to_dict(include_message_content=True)}
+                return {"occasion": occasion.to_dict(include_message_content=True)}
+            else:
+                return bad_request("delivery_method must be either email or sms")
 
     return error_response(
         401, "you do not have the necessary authorization for this action/resource"

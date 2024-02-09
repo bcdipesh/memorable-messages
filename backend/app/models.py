@@ -80,6 +80,8 @@ class Occasion(db.Model):
     message_content: so.Mapped[str] = so.mapped_column(sa.Text())
     is_repeated: so.Mapped[bool] = so.mapped_column(server_default=sa.text("false"))
     date_time: so.Mapped[datetime] = so.mapped_column(sa.DateTime(timezone=True))
+    receiver_email: so.Mapped[Optional[str]] = so.mapped_column(sa.String(120))
+    receiver_phone: so.Mapped[Optional[str]] = so.mapped_column(sa.String(15))
     created_at: so.Mapped[datetime] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc), type_=sa.DateTime(timezone=True)
     )
@@ -100,6 +102,8 @@ class Occasion(db.Model):
             "occasion_type": self.occasion_type,
             "is_repeated": self.is_repeated,
             "date_time": self.date_time,
+            "receiver_email": self.receiver_email,
+            "receiver_phone": self.receiver_phone,
             "created_at": self.created_at,
         }
 
@@ -116,6 +120,8 @@ class Occasion(db.Model):
             "is_repeated",
             "message_content",
             "date_time",
+            "receiver_email",
+            "receiver_phone",
         ]:
             if field in data:
                 setattr(self, field, data[field])

@@ -37,13 +37,15 @@ def schedule_email(occasion, action="CREATE"):
                 current_app._get_current_object(),
                 occasion.occasion_type,
                 occasion.user.email,
-                current_app.config["ADMINS"],
+                [occasion.receiver_email],
                 occasion.message_content,
                 occasion.message_content,
             ],
             id=job_id,
             misfire_grace_time=86400,
         )
+    elif action == "DELETE" and scheduler.get_job(job_id) is not None:
+        scheduler.remove_job(id=job_id)
     else:
         scheduler.add_job(
             func=send_email,
@@ -53,7 +55,7 @@ def schedule_email(occasion, action="CREATE"):
                 current_app._get_current_object(),
                 occasion.occasion_type,
                 occasion.user.email,
-                current_app.config["ADMINS"],
+                [occasion.receiver_email],
                 occasion.message_content,
                 occasion.message_content,
             ],
