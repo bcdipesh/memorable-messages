@@ -13,28 +13,40 @@ const Layout = () => {
   return (
     <div className="layout container flex h-screen flex-col justify-between">
       {/* Navigation bar */}
-      <nav className="mt-6 hidden list-none justify-between md:flex">
-        {token && (
-          <li>
-            <Button variant="secondary" onClick={handleLogout}>
-              Logout
-            </Button>
-          </li>
-        )}
-        {!token && (
-          <>
-            <li>
-              <Link to="/login">
-                <Button variant="secondary">Login</Button>
-              </Link>
+      <nav className="mt-6 flex list-none flex-col justify-between space-y-6 md:flex-row md:space-y-0">
+        {/* Left content */}
+        <Logo />
+
+        {/* Right content */}
+        <div className="flex space-x-6">
+          {token && (
+            <li className="flex space-x-6">
+              <Button variant="outline" asChild>
+                <Link to="/profile">Profile</Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link to="/occasions">Occasions</Link>
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
             </li>
-            <li>
-              <Link to="/signup">
-                <Button>Signup</Button>
-              </Link>
-            </li>
-          </>
-        )}
+          )}
+          {!token && (
+            <>
+              <li>
+                <Link to="/login">
+                  <Button variant="secondary">Login</Button>
+                </Link>
+              </li>
+              <li>
+                <Link to="/signup">
+                  <Button>Signup</Button>
+                </Link>
+              </li>
+            </>
+          )}
+        </div>
       </nav>
 
       <Outlet />

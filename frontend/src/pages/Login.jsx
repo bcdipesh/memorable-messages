@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,7 +22,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const Login = () => {
   const { toast } = useToast();
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, token } = useContext(AuthContext);
   const navigate = useNavigate();
   const form = useForm({
     resolver: yupResolver(loginSchema),
@@ -31,6 +31,13 @@ const Login = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+    document.title = "Memorable Messages | Log In";
+  }, []);
 
   const showToast = (title, description, variant = "default") =>
     toast({

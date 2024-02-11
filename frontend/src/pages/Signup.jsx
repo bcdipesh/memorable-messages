@@ -1,5 +1,8 @@
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+
+import AuthContext from "@/contexts/authContext/AuthContext";
 
 import signupSchema from "@/schemas/signupSchema";
 
@@ -21,6 +24,7 @@ import { useToast } from "@/components/ui/use-toast";
 const Signup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { token } = useContext(AuthContext);
   const form = useForm({
     resolver: yupResolver(signupSchema),
     defaultValues: {
@@ -29,6 +33,13 @@ const Signup = () => {
       email: "",
     },
   });
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+    document.title = "Memorable Messages | Sign Up";
+  }, []);
 
   const showToast = (title, description, variant = "default") =>
     toast({
