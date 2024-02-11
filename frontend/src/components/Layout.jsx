@@ -3,10 +3,20 @@ import { Link, Outlet } from "react-router-dom";
 
 import AuthContext from "@/contexts/authContext/AuthContext";
 
+import { Laptop, Moon, Sun, SunMoon } from "lucide-react";
+
 import Logo from "@/components/Logo";
+import { useTheme } from "@/components/ThemeProvider";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Layout = () => {
+  const { setTheme } = useTheme();
   const { token, username, handleLogout } = useContext(AuthContext);
   const currentYear = new Date().getFullYear();
 
@@ -19,33 +29,66 @@ const Layout = () => {
 
         {/* Right content */}
         <div className="flex space-x-6">
-          {token && (
-            <li className="flex space-x-6">
-              <Button variant="outline" asChild>
-                <Link to="/profile">Profile</Link>
-              </Button>
-              <Button variant="outline" asChild>
-                <Link to="/occasions">Occasions</Link>
-              </Button>
-              <Button variant="outline" onClick={handleLogout}>
-                Logout
-              </Button>
+          <ul className="flex space-x-6">
+            {token && (
+              <>
+                <li>
+                  <Button className="rounded-full" variant="ghost" asChild>
+                    <Link to="/profile">Profile</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button className="rounded-full" variant="ghost" asChild>
+                    <Link to="/occasions">Occasions</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    className="rounded-full"
+                    variant="ghost"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                </li>
+              </>
+            )}
+            {!token && (
+              <>
+                <li>
+                  <Button className="rounded-full" variant="ghost" asChild>
+                    <Link to="/login">Login</Link>
+                  </Button>
+                </li>
+                <li>
+                  <Button className="rounded-full" variant="ghost" asChild>
+                    <Link to="/signup">Sign Up</Link>
+                  </Button>
+                </li>
+              </>
+            )}
+            <li>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="rounded-full" variant="ghost" size="icon">
+                    <SunMoon />
+                    <span className="sr-only">Toggle theme</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => setTheme("light")}>
+                    <Sun />
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("dark")}>
+                    <Moon />
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("system")}>
+                    <Laptop />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </li>
-          )}
-          {!token && (
-            <>
-              <li>
-                <Link to="/login">
-                  <Button variant="secondary">Login</Button>
-                </Link>
-              </li>
-              <li>
-                <Link to="/signup">
-                  <Button>Signup</Button>
-                </Link>
-              </li>
-            </>
-          )}
+          </ul>
         </div>
       </nav>
 
