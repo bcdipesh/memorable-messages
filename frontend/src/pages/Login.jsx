@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import AuthContext from "@/contexts/authContext/AuthContext";
 import loginSchema from "@/schemas/loginSchema";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,7 @@ const Login = () => {
   const { toast } = useToast();
   const { handleLogin, token } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [IsloggingIn, setIsLoggingIn] = useState(false);
   const form = useForm({
     resolver: yupResolver(loginSchema),
     defaultValues: {
@@ -48,8 +50,10 @@ const Login = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
+    setIsLoggingIn(true);
     try {
       await handleLogin(data.username, data.password);
+      setIsLoggingIn(false);
       showToast("Welcome back!", `Glad you're back, ${data.username}.`);
       navigate("/");
     } catch (err) {
@@ -66,6 +70,7 @@ const Login = () => {
           "destructive",
         );
       }
+      setIsLoggingIn(false);
     }
   };
 
@@ -133,7 +138,12 @@ const Login = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">Login</Button>
+              <Button type="submit">
+                {IsloggingIn && (
+                  <Loader2 className="mr-3 size-5 animate-spin" />
+                )}
+                Login
+              </Button>
             </form>
           </Form>
         </div>

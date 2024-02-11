@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import AuthContext from "@/contexts/authContext/AuthContext";
 import signupSchema from "@/schemas/signupSchema";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Loader2 } from "lucide-react";
 
 import MemorableMessagesApi from "@/apis/memorableMessages/memorableMessagesApi";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { token } = useContext(AuthContext);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const form = useForm({
     resolver: yupResolver(signupSchema),
     defaultValues: {
@@ -50,8 +52,10 @@ const Signup = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
+    setIsSigningUp(true);
     try {
       await MemorableMessagesApi.register(data);
+      setIsSigningUp(false);
       showToast(
         "Registration successful!",
         `Welcome to the community, ${data.username}.`,
@@ -71,6 +75,7 @@ const Signup = () => {
           "destructive",
         );
       }
+      setIsSigningUp(false);
     }
   };
 
@@ -157,6 +162,9 @@ const Signup = () => {
                 )}
               />
               <Button type="submit" className="w-full md:w-auto">
+                {isSigningUp && (
+                  <Loader2 className="mr-3 size-5 animate-spin" />
+                )}
                 Sign Up
               </Button>
             </form>
@@ -167,7 +175,7 @@ const Signup = () => {
             <Link to="/terms-of-service">
               <Button
                 variant="link"
-                className="p-0 text-muted-foreground underline hover:text-black"
+                className="p-0 text-muted-foreground underline hover:text-black dark:hover:text-white"
               >
                 Terms of Service
               </Button>
@@ -176,7 +184,7 @@ const Signup = () => {
             <Link to="/privacy-policy">
               <Button
                 variant="link"
-                className="hover: p-0 text-muted-foreground underline hover:text-black"
+                className="hover: p-0 text-muted-foreground underline hover:text-black dark:hover:text-white"
               >
                 Privacy Policy
               </Button>
