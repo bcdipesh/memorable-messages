@@ -4,6 +4,7 @@ from config import Config
 from flasgger import Swagger
 from flask import Flask
 from flask_apscheduler import APScheduler
+from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
 from flask_migrate import Migrate
@@ -14,6 +15,7 @@ migrate = Migrate()
 jwt = JWTManager()
 swagger = Swagger()
 mail = Mail()
+cors = CORS()
 scheduler = APScheduler()
 
 
@@ -26,6 +28,7 @@ def create_app(config_class=Config):
     jwt.init_app(app)
     swagger.init_app(app)
     mail.init_app(app)
+    cors.init_app(app)
     scheduler.init_app(app)
     scheduler.start()
 
