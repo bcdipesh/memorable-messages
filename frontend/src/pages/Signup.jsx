@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 import AuthContext from "@/contexts/authContext/AuthContext";
 
-import signupSchema from "@/schemas/signupSchema";
+import userSchema from "@/schemas/userSchema";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Loader2 } from "lucide-react";
 
 import MemorableMessagesApi from "@/apis/memorableMessages/memorableMessagesApi";
+import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -28,7 +29,7 @@ const Signup = () => {
   const { token } = useContext(AuthContext);
   const [isSigningUp, setIsSigningUp] = useState(false);
   const form = useForm({
-    resolver: yupResolver(signupSchema),
+    resolver: yupResolver(userSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -63,6 +64,7 @@ const Signup = () => {
       navigate("/");
     } catch (err) {
       if (err.statusCode === 400) {
+        setIsSigningUp(false);
         showToast(
           "Unable to create account",
           "Please check your information and try again.",
@@ -75,7 +77,6 @@ const Signup = () => {
           "destructive",
         );
       }
-      setIsSigningUp(false);
     }
   };
 
@@ -83,7 +84,8 @@ const Signup = () => {
     <div className="signup md:flex">
       {/* Left container */}
       <div className="hidden flex-col justify-between bg-zinc-900 p-10 font-medium text-white md:flex md:w-1/2">
-        <h2 className="text-3xl">Memorable Messages</h2>
+        <Logo />
+
         <blockquote className="space-y-2">
           <p className="text-lg">
             “Your loved onces deserve heartfelt messages. Sign up to create

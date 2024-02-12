@@ -1,4 +1,6 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 import ErrorHandler from "@/lib/errorHandler";
 
 const BASE_URL =
@@ -66,17 +68,17 @@ class MemorableMessagesApi {
   // API routes.
 
   static async login(username, password) {
-    const res = await this.request(
+    const resp = await this.request(
       "auth/login",
       { username, password },
       "POST",
     );
 
-    return res.access_token;
+    return resp.access_token;
   }
 
   static async register({ username, password, email }) {
-    const res = await this.request(
+    const resp = await this.request(
       "auth/register",
       {
         username,
@@ -86,7 +88,37 @@ class MemorableMessagesApi {
       "POST",
     );
 
-    return res.access_token;
+    return resp.access_token;
+  }
+
+  static async getCurrentUserDetails() {
+    const decodedToken = jwtDecode(MemorableMessagesApi.token);
+    const resp = await this.request(`users/${decodedToken.sub}`);
+
+    return resp;
+  }
+
+  static async updateUserDetails({ username, email, password }) {
+    const decodedToken = jwtDecode(MemorableMessagesApi.token);
+    const updatedDetails = { username, email };
+    if (password) {
+      updatedDetails.password = password;
+    }
+
+    const resp = await this.request(
+      `users/${decodedToken.sub}`,
+      updatedDetails,
+      "PUT",
+    );
+
+    return resp;
+  }
+
+  static async getUserOccasions() {
+    const decodedToken = jwtDecode(MemorableMessagesApi.token);
+    const resp = await this.request(`users/${decodedToken.sub}/occasions`);
+
+    return resp.occasions;
   }
 }
 

@@ -267,6 +267,9 @@ def update_user(id):
         ):
             return bad_request("please use a different email address")
 
+        if "password" in data:
+            user.set_password(data["password"])
+
         user.from_dict(data, new_user=False)
         db.session.commit()
 

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const signupSchema = yup
+const userSchema = yup
   .object({
     username: yup.string().required(),
     password: yup.string().required(),
@@ -8,4 +8,4 @@ const signupSchema = yup
   })
   .required();
 
-export default signupSchema;
+export default userSchema;

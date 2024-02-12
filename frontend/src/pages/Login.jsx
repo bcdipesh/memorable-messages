@@ -9,6 +9,7 @@ import loginSchema from "@/schemas/loginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Loader2 } from "lucide-react";
 
+import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -58,6 +59,7 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       if (err.statusCode === 401) {
+        setIsLoggingIn(false);
         showToast(
           "Login failed",
           "Please check your username and password and try again.",
@@ -70,7 +72,6 @@ const Login = () => {
           "destructive",
         );
       }
-      setIsLoggingIn(false);
     }
   };
 
@@ -78,7 +79,7 @@ const Login = () => {
     <div className="login md:flex">
       {/* Left container */}
       <div className="hidden flex-col justify-between bg-zinc-900 p-10 font-medium text-white md:flex md:w-1/2">
-        <h2 className="text-3xl">Memorable Messages</h2>
+        <Logo />
         <blockquote className="space-y-2">
           <p className="text-lg">
             “Never underestimate the power of a meaningful message. Login to
