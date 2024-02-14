@@ -120,6 +120,31 @@ class MemorableMessagesApi {
 
     return resp.occasions;
   }
+
+  static async createOccasion({
+    occasion_type,
+    message_content,
+    receiver_email,
+    receiver_phone,
+    delivery_method,
+    date_time,
+  }) {
+    const decodedToken = jwtDecode(MemorableMessagesApi.token);
+    const resp = await this.request(
+      `users/${decodedToken.sub}/occasions`,
+      {
+        occasion_type,
+        message_content,
+        receiver_email,
+        receiver_phone,
+        delivery_method,
+        date_time,
+      },
+      "POST",
+    );
+
+    return resp;
+  }
 }
 
 export default MemorableMessagesApi;

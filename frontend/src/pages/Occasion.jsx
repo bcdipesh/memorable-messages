@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import AuthContext from "@/contexts/authContext/AuthContext";
 
 import MemorableMessagesApi from "@/apis/memorableMessages/memorableMessagesApi";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -55,6 +57,9 @@ const Occasion = () => {
 
   return (
     <div className="occasions h-1/2">
+      <Button variant="ghost" asChild>
+        <Link to="/occasions/create">Create New Occasion</Link>
+      </Button>
       <Table>
         <TableCaption>A list of occasions that you created.</TableCaption>
         <TableHeader>

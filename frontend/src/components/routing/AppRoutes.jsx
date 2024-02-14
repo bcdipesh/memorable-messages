@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import ProtectedRoute from "@/components/routing/ProtectedRoute";
+import CreateOccasion from "@/pages/CreateOccasion";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import NotFound from "@/pages/NotFound";
@@ -19,6 +20,7 @@ const AppRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/occasions" element={<Occasion />} />
+          <Route path="/occasions/create" element={<CreateOccasion />} />
         </Route>
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
