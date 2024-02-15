@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 
+/**
+ * NotFound component renders a 404 page.
+ *
+ * @returns {React.JSX.Element} NotFound component UI.
+ */
 const NotFound = () => (
   <div className="not-found container flex h-screen flex-col justify-center gap-6">
     <h1 className="text-3xl font-bold">Page not found</h1>

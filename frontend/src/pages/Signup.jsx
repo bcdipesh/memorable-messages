@@ -23,6 +23,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
+/**
+ * Signup component renders form for user registration.
+ *
+ * @returns {React.JSX.Element} Signup component UI.
+ */
 const Signup = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -38,12 +43,19 @@ const Signup = () => {
   });
 
   useEffect(() => {
+    // Redirect to the home page if the user is already authenticated
     if (token) {
       navigate("/");
     }
     document.title = "Memorable Messages | Sign Up";
   }, []);
 
+  /**
+   * Display a toast notification with optional variant
+   * @param title - Title of the notification
+   * @param description - Description of the notification
+   * @param variant - Optional variant (default, success, destructive)
+   */
   const showToast = (title, description, variant = "default") =>
     toast({
       variant,
@@ -51,6 +63,11 @@ const Signup = () => {
       description,
     });
 
+  /**
+   * Handle form submission for user registration.
+   * @param {object} data - Form data.
+   * @param {Event} e - Form submission event.
+   */
   const onSubmit = async (data, e) => {
     e.preventDefault();
     setIsSigningUp(true);
@@ -172,6 +189,7 @@ const Signup = () => {
             </form>
           </Form>
 
+          {/* Terms of Service and Privacy Policy links */}
           <p className="mt-6 text-center text-muted-foreground md:text-left">
             By clicking continue, you agree to our{" "}
             <Link to="/terms-of-service">

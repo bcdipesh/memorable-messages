@@ -25,17 +25,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
 
+/**
+ * Profile component renders form managing user account details and password.
+ *
+ * @returns {React.JSX.Element} Profile component UI.
+ */
 const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const { toast } = useToast();
   const { handleLogout } = useContext(AuthContext);
+
+  // Form setup for user details
   const userDetailsForm = useForm({
     resolver: yupResolver(
       yup.object({
@@ -52,6 +58,8 @@ const Profile = () => {
       email,
     },
   });
+
+  // Form setup for user password
   const userPasswordForm = useForm({
     resolver: yupResolver(
       yup.object({
@@ -65,6 +73,12 @@ const Profile = () => {
     },
   });
 
+  /**
+   * Display a toast notification with optional variant
+   * @param title - Title of the notification
+   * @param description - Description of the notification
+   * @param variant - Optional variant (default, success, destructive)
+   */
   const showToast = (title, description, variant = "default") =>
     toast({
       variant,
@@ -73,8 +87,12 @@ const Profile = () => {
     });
 
   useEffect(() => {
+    // Set document title
     document.title = "Memorable Messages | Profile";
 
+    /**
+     * Fetch user details and update state variables.
+     */
     const getUserDetails = async () => {
       setIsLoading(true);
       try {
@@ -98,6 +116,11 @@ const Profile = () => {
     getUserDetails();
   }, []);
 
+  /**
+   * Handle form submission for updating user details.
+   * @param {object} data - Form data.
+   * @param {Event} e - Form submission event.
+   */
   const onSubmit = async (data, e) => {
     e.preventDefault();
 
@@ -123,10 +146,18 @@ const Profile = () => {
     }
   };
 
+  /**
+   * Handle form submission for updating user password.
+   * @param {object} data - Form data.
+   * @param {Event} e - Form submission event.
+   */
   const updatePassowrd = async (data, e) => {
     e.preventDefault();
     try {
+      // Log in with the current password
       await MemorableMessagesApi.login(username, data.currentPassword);
+
+      // Update user details with the new password
       await MemorableMessagesApi.updateUserDetails({
         username,
         email,
@@ -136,6 +167,8 @@ const Profile = () => {
         "Password updated!",
         "Your password has been successfully changed. Remember to keep it safe!",
       );
+
+      // Log out after updating the password
       handleLogout();
     } catch (err) {
       if (err.statusCode === 400) {

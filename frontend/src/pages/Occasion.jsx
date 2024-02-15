@@ -20,17 +20,6 @@ import {
 import moment from "moment";
 
 import MemorableMessagesApi from "@/apis/memorableMessages/memorableMessagesApi";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -53,6 +42,7 @@ import {
 } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
 
+// Column definitions for the table
 const columns = [
   {
     accessorKey: "occasion_type",
@@ -119,6 +109,11 @@ const columns = [
   },
 ];
 
+/**
+ * Occasion component renders the list of user occasions.
+ *
+ * @returns {React.JSX.Element} Occasion component UI.
+ */
 const Occasion = () => {
   const { handleLogout } = useContext(AuthContext);
   const { toast } = useToast();
@@ -147,6 +142,12 @@ const Occasion = () => {
     },
   });
 
+  /**
+   * Display a toast notification with optional variant
+   * @param title - Title of the notification
+   * @param description - Description of the notification
+   * @param variant - Optional variant (default, success, destructive)
+   */
   const showToast = (title, description, variant = "default") =>
     toast({
       variant,
@@ -154,6 +155,9 @@ const Occasion = () => {
       description,
     });
 
+  /**
+   * Fetch user occasions on component mount.
+   */
   useEffect(() => {
     document.title = "Memorable Messages | Occasions";
 

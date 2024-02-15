@@ -22,6 +22,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
+/**
+ * Login component handles user login.
+ * @returns {React.JSX.Element} Login component UI.
+ */
 const Login = () => {
   const { toast } = useToast();
   const { handleLogin, token } = useContext(AuthContext);
@@ -36,12 +40,19 @@ const Login = () => {
   });
 
   useEffect(() => {
+    // Redirect to home if user is already logged in
     if (token) {
       navigate("/");
     }
     document.title = "Memorable Messages | Log In";
   }, []);
 
+  /**
+   * Display a toast notification with optional variant
+   * @param title - Title of the notification
+   * @param description - Description of the notification
+   * @param variant - Optional variant (default, success, destructive)
+   */
   const showToast = (title, description, variant = "default") =>
     toast({
       variant,
@@ -49,6 +60,11 @@ const Login = () => {
       description,
     });
 
+  /**
+   * Handle form submission.
+   * @param {object} data - Form data (username and password).
+   * @param {Event} e - Form submit event.
+   */
   const onSubmit = async (data, e) => {
     e.preventDefault();
     setIsLoggingIn(true);

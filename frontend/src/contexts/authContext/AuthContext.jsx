@@ -1,5 +1,16 @@
 import { createContext } from "react";
 
-const AuthContext = createContext();
+/**
+ * AuthContext to manage authentication state across the application.
+ *
+ * This context provides access to user authentication information such as token and username.
+ * It also includes a function to handle user logout.
+ */
+const AuthContext = createContext({
+  token: null,
+  username: null,
+  handleLogin: () => null,
+  handleLogout: () => null,
+});
 
 export default AuthContext;

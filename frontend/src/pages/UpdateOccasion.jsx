@@ -24,12 +24,19 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 
+/**
+ * UpdateOccasion component renders form for updating occasions.
+ *
+ * @returns {React.JSX.Element} UpdateOccasion component UI.
+ */
 const UpdateOccasion = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { toast } = useToast();
   const { handleLogout } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Form instance for managing form data and validation
   const form = useForm({
     resolver: yupResolver(createOccasionSchema),
     defaultValues: {
@@ -45,6 +52,9 @@ const UpdateOccasion = () => {
   useEffect(() => {
     document.title = "Memorable Messages | Update Occasion";
 
+    /**
+     * Fetches occasion details for the given ID
+     */
     const getOccasion = async () => {
       setIsLoading(true);
       try {
@@ -71,6 +81,12 @@ const UpdateOccasion = () => {
     getOccasion();
   }, []);
 
+  /**
+   * Display a toast notification with optional variant
+   * @param title - Title of the notification
+   * @param description - Description of the notification
+   * @param variant - Optional variant (default, success, destructive)
+   */
   const showToast = (title, description, variant = "default") =>
     toast({
       variant,
@@ -78,6 +94,11 @@ const UpdateOccasion = () => {
       description,
     });
 
+  /**
+   * Handle form submission for updating occasions.
+   * @param {object} data - Form data.
+   * @param {Event} e - Form submission event.
+   */
   const onSubmit = async (data, e) => {
     e.preventDefault();
     data.date_time = moment(data.date_time).toISOString();
