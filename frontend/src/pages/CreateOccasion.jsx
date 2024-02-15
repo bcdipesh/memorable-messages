@@ -81,8 +81,9 @@ const CreateOccasion = () => {
 
   return (
     <div className="create-occasion mt-6">
-      {/* Create Occasion form */}
+      <h1 className="mb-6 text-3xl font-bold">Create Occasion</h1>
 
+      {/* Create Occasion form */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

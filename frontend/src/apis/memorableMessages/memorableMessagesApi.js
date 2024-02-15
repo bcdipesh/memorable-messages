@@ -121,6 +121,16 @@ class MemorableMessagesApi {
     return resp.occasions;
   }
 
+  static async getOccasionById(id) {
+    const resp = await this.request(`occasions/${id}`);
+
+    return resp.occasion;
+  }
+
+  static async deleteOccasionById(id) {
+    await this.request(`occasions/${id}`, {}, "DELETE");
+  }
+
   static async createOccasion({
     occasion_type,
     message_content,

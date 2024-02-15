@@ -17,10 +17,10 @@ import {
   Loader2,
   MoreHorizontal,
 } from "lucide-react";
+import moment from "moment";
 
 import MemorableMessagesApi from "@/apis/memorableMessages/memorableMessagesApi";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -69,10 +69,12 @@ const columns = [
   {
     accessorKey: "date_time",
     header: "Delivery Date and Time",
+    cell: (props) => moment(props.getValue()).format("YYYY-MM-DD hh:mm:ss A"),
   },
   {
     accessorKey: "created_at",
     header: "Created At",
+    cell: (props) => moment(props.getValue()).format("YYYY-MM-DD hh:mm:ss A"),
   },
   {
     id: "actions",
@@ -87,8 +89,15 @@ const columns = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log(row.original)}>
-              Update Occasion
+            <DropdownMenuItem>
+              <Link to={`/occasions/${row.original.id}/update`}>Update</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={async () =>
+                await MemorableMessagesApi.deleteOccasionById(row.original.id)
+              }
+            >
+              Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -106,7 +115,6 @@ const Occasion = () => {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
-
   const table = useReactTable({
     data: occasions,
     columns,
@@ -162,7 +170,7 @@ const Occasion = () => {
     <div className="w-full">
       {isLoading && (
         <span className="flex w-full items-center justify-center text-sm text-muted-foreground">
-          <Loader2 className="mr-1 size-5 animate-spin" /> Loading
+          <Loader2 className="mr-1 size-5 animate-spin" /> Loading ...
         </span>
       )}
       {!isLoading && (
@@ -212,6 +220,9 @@ const Occasion = () => {
           </div>
           <div className="rounded-md border">
             <Table>
+              <TableCaption className="mb-4">
+                A list of your occasions.
+              </TableCaption>
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>

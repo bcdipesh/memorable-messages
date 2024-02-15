@@ -11,6 +11,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Profile from "@/pages/Profile";
 import Signup from "@/pages/Signup";
 import TermsOfService from "@/pages/TermsOfService";
+import UpdateOccasion from "@/pages/UpdateOccasion";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/occasions" element={<Occasion />} />
           <Route path="/occasions/create" element={<CreateOccasion />} />
+          <Route path="/occasions/:id/update" element={<UpdateOccasion />} />
         </Route>
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
