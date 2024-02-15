@@ -20,6 +20,17 @@ import {
 import moment from "moment";
 
 import MemorableMessagesApi from "@/apis/memorableMessages/memorableMessagesApi";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -93,9 +104,11 @@ const columns = [
               <Link to={`/occasions/${row.original.id}/update`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={async () =>
-                await MemorableMessagesApi.deleteOccasionById(row.original.id)
-              }
+              onClick={async () => {
+                await MemorableMessagesApi.deleteOccasionById(row.original.id);
+                location.reload();
+              }}
+              className="cursor-pointer"
             >
               Delete
             </DropdownMenuItem>
