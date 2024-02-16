@@ -214,6 +214,44 @@ class MemorableMessagesApi {
 
     return resp;
   }
+
+  /**
+   * Updates an existing occasion.
+   *
+   * @param {object} occasionData Data for the new occasion.
+   * @param {number} occasionData.id The id of the occasion.
+   * @param {string} occasionData.occasion_type The type of occasion.
+   * @param {string} occasionData.message_content The message content for the occasion.
+   * @param {string} occasionData.receiver_email (optional) The recipient's email address.
+   * @param {string} occasionData.receiver_phone (optional) The recipient's phone number.
+   * @param {string} occasionData.delivery_method The delivery method for the occasion.
+   * @param {string} occasionData.date_time The date and time for the occasion.
+   * @returns {Promise<object>} Promise resolving to the updated occasion object.
+   */
+  static async updateOccasion({
+    id,
+    occasion_type,
+    message_content,
+    receiver_email,
+    receiver_phone,
+    delivery_method,
+    date_time,
+  }) {
+    const resp = await this.request(
+      `occasions/${id}`,
+      {
+        occasion_type,
+        message_content,
+        receiver_email,
+        receiver_phone,
+        delivery_method,
+        date_time,
+      },
+      "PUT",
+    );
+
+    return resp;
+  }
 }
 
 export default MemorableMessagesApi;

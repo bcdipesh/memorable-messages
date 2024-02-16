@@ -102,9 +102,10 @@ const UpdateOccasion = () => {
   const onSubmit = async (data, e) => {
     e.preventDefault();
     data.date_time = moment(data.date_time).toISOString();
+    data.id = id;
     setIsLoading(true);
     try {
-      await MemorableMessagesApi.createOccasion(data);
+      await MemorableMessagesApi.updateOccasion(data);
       setIsLoading(false);
       showToast("Occasion successfully updated!", "You can relax now.");
       navigate("/occasions");
