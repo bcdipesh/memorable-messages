@@ -30,7 +30,9 @@ def create_app(config_class=Config):
     mail.init_app(app)
     cors.init_app(app)
     scheduler.init_app(app)
-    scheduler.start()
+
+    if not app.debug and not app.testing:
+        scheduler.start()
 
     from app.api import bp as api_bp
     from app.errors import bp as errors_bp
