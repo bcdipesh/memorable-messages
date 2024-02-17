@@ -29,14 +29,15 @@ def create_app(config_class=Config):
     swagger.init_app(app)
     mail.init_app(app)
     cors.init_app(app)
-    scheduler.init_app(app)
-    scheduler.start()
 
     from app.api import bp as api_bp
     from app.errors import bp as errors_bp
 
     app.register_blueprint(errors_bp)
     app.register_blueprint(api_bp, url_prefix="/api/v1")
+
+    scheduler.init_app(app)
+    scheduler.start()
 
     return app
 
