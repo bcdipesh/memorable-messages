@@ -1,0 +1,136 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="login md:flex"
+  >
+    <div
+      class="hidden flex-col justify-between bg-zinc-900 p-10 font-medium text-white md:flex md:w-1/2"
+    >
+      <a
+        href="/"
+      >
+        <div
+          class="logo flex items-center space-x-3"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.913 2.658c2.075-.27 4.19-.408 6.337-.408 2.147 0 4.262.139 6.337.408 1.922.25 3.291 1.861 3.405 3.727a4.403 4.403 0 0 0-1.032-.211 50.89 50.89 0 0 0-8.42 0c-2.358.196-4.04 2.19-4.04 4.434v4.286a4.47 4.47 0 0 0 2.433 3.984L7.28 21.53A.75.75 0 0 1 6 21v-4.03a48.527 48.527 0 0 1-1.087-.128C2.905 16.58 1.5 14.833 1.5 12.862V6.638c0-1.97 1.405-3.718 3.413-3.979Z"
+            />
+            <path
+              d="M15.75 7.5c-1.376 0-2.739.057-4.086.169C10.124 7.797 9 9.103 9 10.609v4.285c0 1.507 1.128 2.814 2.67 2.94 1.243.102 2.5.157 3.768.165l2.782 2.781a.75.75 0 0 0 1.28-.53v-2.39l.33-.026c1.542-.125 2.67-1.433 2.67-2.94v-4.286c0-1.505-1.125-2.811-2.664-2.94A49.392 49.392 0 0 0 15.75 7.5Z"
+            />
+          </svg>
+          <span
+            class="text-xl"
+          >
+            Memorable Messages
+          </span>
+        </div>
+      </a>
+      <blockquote
+        class="space-y-2"
+      >
+        <p
+          class="text-lg"
+        >
+          “Never underestimate the power of a meaningful message. Login to reconnect with loved onces and create memories that last.”
+        </p>
+        <footer
+          class="text-sm"
+        >
+          Dipesh B C
+        </footer>
+      </blockquote>
+    </div>
+    <div
+      class="container relative flex h-screen flex-col items-center justify-center space-y-5 md:w-1/2"
+    >
+      <a
+        class="absolute right-5 top-5"
+        href="/signup"
+      >
+        <button
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+          type="button"
+        >
+          Sign Up
+        </button>
+      </a>
+      <div
+        class="container flex flex-col space-y-2"
+      >
+        <h1
+          class="text-3xl font-bold"
+        >
+          Login to your account
+        </h1>
+        <p
+          class="text-muted-foreground"
+        >
+          Enter your username and password to login
+        </p>
+      </div>
+      <div
+        class="container"
+      >
+        <form
+          class="space-y-8"
+        >
+          <div
+            class="space-y-2"
+          >
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              for=":r2:-form-item"
+            >
+              Username
+            </label>
+            <input
+              aria-describedby=":r2:-form-item-description"
+              aria-invalid="false"
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              id=":r2:-form-item"
+              name="username"
+              placeholder="username"
+              value=""
+            />
+          </div>
+          <div
+            class="space-y-2"
+          >
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              for=":r3:-form-item"
+            >
+              Password
+            </label>
+            <input
+              aria-describedby=":r3:-form-item-description"
+              aria-invalid="false"
+              class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              id=":r3:-form-item"
+              name="password"
+              placeholder="password"
+              type="password"
+              value=""
+            />
+          </div>
+          <button
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,5 +1,10 @@
 import * as yup from "yup";
 
+/**
+ * Defines the schema for creating a new occasion
+ *
+ * @returns {Object} A yup schema object
+ */
 const createOccasionSchema = yup
   .object({
     occasion_type: yup.string().required("Occasion Type is required"),

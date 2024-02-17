@@ -1,0 +1,120 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="h-1/2"
+    data-orientation="horizontal"
+    dir="ltr"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid w-full grid-cols-2"
+      data-orientation="horizontal"
+      role="tablist"
+      style="outline: none;"
+      tabindex="0"
+    >
+      <button
+        aria-controls="radix-:r5:-content-account"
+        aria-selected="true"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-state="active"
+        id="radix-:r5:-trigger-account"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Account
+      </button>
+      <button
+        aria-controls="radix-:r5:-content-password"
+        aria-selected="false"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-state="inactive"
+        id="radix-:r5:-trigger-password"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Password
+      </button>
+    </div>
+    <div
+      aria-labelledby="radix-:r5:-trigger-account"
+      class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      data-orientation="horizontal"
+      data-state="active"
+      id="radix-:r5:-content-account"
+      role="tabpanel"
+      style="animation-duration: 0s;"
+      tabindex="0"
+    >
+      <div
+        class="rounded-lg border bg-card text-card-foreground shadow-sm"
+      >
+        <div
+          class="flex flex-col space-y-1.5 p-6"
+        >
+          <h3
+            class="text-2xl font-semibold leading-none tracking-tight"
+          >
+            Account
+          </h3>
+          <p
+            class="text-sm text-muted-foreground"
+          >
+            Make changes to your account here. Click save when you're done.
+          </p>
+        </div>
+        <div
+          class="p-6 pt-0"
+        >
+          <div
+            class="user-details-loading-skeleton flex flex-col space-y-4"
+          >
+            <div
+              class="animate-pulse rounded-md bg-muted h-5 w-16"
+            />
+            <div
+              class="animate-pulse rounded-md bg-muted h-10 w-full"
+            />
+            <div
+              class="animate-pulse rounded-md bg-muted h-5 w-16"
+            />
+            <div
+              class="animate-pulse rounded-md bg-muted h-10 w-full"
+            />
+          </div>
+           
+        </div>
+        <div
+          class="flex items-center p-6 pt-0"
+        >
+          <button
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+            form="userDetailsForm"
+            type="submit"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-labelledby="radix-:r5:-trigger-password"
+      class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      data-orientation="horizontal"
+      data-state="inactive"
+      hidden=""
+      id="radix-:r5:-content-password"
+      role="tabpanel"
+      tabindex="0"
+    />
+  </div>
+</DocumentFragment>
+`;

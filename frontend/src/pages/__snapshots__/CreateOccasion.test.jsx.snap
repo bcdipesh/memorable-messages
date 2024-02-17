@@ -1,0 +1,134 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="create-occasion mt-6"
+  >
+    <h1
+      class="mb-6 text-3xl font-bold"
+    >
+      Create Occasion
+    </h1>
+    <form
+      class="space-y-8"
+    >
+      <div
+        class="space-y-2"
+      >
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for=":r6:-form-item"
+        >
+          Occasion Type
+        </label>
+        <input
+          aria-describedby=":r6:-form-item-description"
+          aria-invalid="false"
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id=":r6:-form-item"
+          name="occasion_type"
+          value=""
+        />
+      </div>
+      <div
+        class="space-y-2"
+      >
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for=":r7:-form-item"
+        >
+          Message
+        </label>
+        <textarea
+          aria-describedby=":r7:-form-item-description"
+          aria-invalid="false"
+          class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id=":r7:-form-item"
+          name="message_content"
+        />
+      </div>
+      <div
+        class="space-y-2"
+      >
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for=":r8:-form-item"
+        >
+          Receiver Email
+        </label>
+        <input
+          aria-describedby=":r8:-form-item-description"
+          aria-invalid="false"
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id=":r8:-form-item"
+          name="receiver_email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="space-y-2"
+      >
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for=":r9:-form-item"
+        >
+          Reciever Phone
+        </label>
+        <input
+          aria-describedby=":r9:-form-item-description"
+          aria-invalid="false"
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id=":r9:-form-item"
+          name="receiver_phone"
+          value=""
+        />
+      </div>
+      <div
+        class="space-y-2"
+      >
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for=":ra:-form-item"
+        >
+          Delivery method
+        </label>
+        <input
+          aria-describedby=":ra:-form-item-description"
+          aria-invalid="false"
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id=":ra:-form-item"
+          name="delivery_method"
+          value="email"
+        />
+      </div>
+      <div
+        class="space-y-2"
+      >
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          for=":rb:-form-item"
+        >
+          Delivery date and time
+        </label>
+        <input
+          aria-describedby=":rb:-form-item-description"
+          aria-invalid="false"
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          id=":rb:-form-item"
+          name="date_time"
+          type="datetime-local"
+          value=""
+        />
+      </div>
+      <button
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+        type="submit"
+      >
+        Create
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

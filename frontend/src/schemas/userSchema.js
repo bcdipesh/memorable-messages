@@ -1,5 +1,10 @@
 import * as yup from "yup";
 
+/**
+ * Defines the schema for user
+ *
+ * @returns {Object} A yup schema object
+ */
 const userSchema = yup
   .object({
     username: yup.string().required(),
