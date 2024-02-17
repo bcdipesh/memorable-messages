@@ -1,2 +1,2 @@
-FLASK_DEBUG=1
-FLASK_APP="memorable-messages.py"
+FLASK_DEBUG=0
+FLASK_APP="memorable_messages.py"
