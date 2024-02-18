@@ -15,6 +15,9 @@ def update_status(event):
         db.session.add(delivery_history)
         db.session.commit()
 
+        print(event.job_id)
+        print("Job executed")
+
 
 def job_added(event):
     with scheduler.app.app_context():
