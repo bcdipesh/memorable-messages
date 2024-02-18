@@ -4,7 +4,7 @@ import logging
 
 from app import db, scheduler
 from app.models import DeliveryHistory
-from apscheduler.events import EVENT_JOB_EXECUTED, EVENT_JOB_MISSED
+from apscheduler.events import EVENT_JOB_ADDED, EVENT_JOB_EXECUTED, EVENT_JOB_MISSED
 
 logging.basicConfig()
 logging.getLogger("apscheduler").setLevel(logging.DEBUG)
@@ -26,5 +26,14 @@ def job_missed_log(event):
         print("Job missed should retry itself", event, event.job_id)
 
 
+def resume_on_add(event):
+    with scheduler.app.app_context():
+        print("Resuming job on EVENT_JOB_ADDED", event)
+        print("Scheduler state", scheduler.state)
+        scheduler.resume()
+        print("Scheduler state", scheduler.state)
+
+
 scheduler.add_listener(update_status, EVENT_JOB_EXECUTED)
 scheduler.add_listener(job_missed_log, EVENT_JOB_MISSED)
+scheduler.add_listener(resume_on_add, EVENT_JOB_ADDED)
