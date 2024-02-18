@@ -38,6 +38,7 @@ def create_app(config_class=Config):
 
     scheduler.init_app(app)
     scheduler.start()
+    print("Scheduler started and running", scheduler.running)
 
     return app
 
