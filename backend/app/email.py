@@ -42,7 +42,7 @@ def schedule_email(occasion, action="CREATE"):
                 occasion.message_content,
             ],
             id=job_id,
-            misfire_grace_time=86400,
+            misfire_grace_time=2628000,
         )
     elif action == "DELETE" and scheduler.get_job(job_id) is not None:
         scheduler.remove_job(id=job_id)
@@ -60,5 +60,5 @@ def schedule_email(occasion, action="CREATE"):
                 occasion.message_content,
             ],
             id=job_id,
-            misfire_grace_time=86400,
+            misfire_grace_time=2628000,
         )
