@@ -1,4 +1,20 @@
-"""auth routes."""
+"""
+auth.py
+
+This file defines authentication-related routes for the Memorable Messages Web Application.
+These routes include user registration, login, password reset request, and password update.
+Each route is documented using OpenAPI-style comments, specifying input parameters, expected responses,
+and possible error cases.
+
+Routes:
+- /auth/register: User registration with JWT token generation.
+- /auth/login: User authentication with JWT token generation.
+- /auth/reset-password/request: Request to reset the user's password and send a reset token via email.
+- /auth/reset-password: Update user password using a valid reset token.
+
+This file handles user authentication processes, providing secure endpoints for user registration,
+login, and password management.
+"""
 
 import sqlalchemy as sa
 from app import db

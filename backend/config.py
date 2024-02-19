@@ -1,4 +1,9 @@
-"""Configuration settings for the application."""
+"""
+config.py
+
+This file defines the configuration settings for the Flask application.
+It includes settings such as database URI, mail server details, API documentation settings, etc.
+"""
 
 import os
 
@@ -9,6 +14,25 @@ load_dotenv(os.path.join(basedir, ".env"))
 
 
 class Config:
+    """
+    Configuration settings for the Flask application.
+
+    Key Configurations:
+    - SQLALCHEMY_TRACK_MODIFICATIONS: Disable modification tracking for SQLAlchemy to improve performance.
+    - SCHEDULER_API_ENABLED: Enable the scheduler API.
+    - SECRET_KEY: Secret key for session management and CSRF protection.
+    - SQLALCHEMY_DATABASE_URI: Database URI for SQLAlchemy.
+    - MAIL_SERVER: Mail server for sending email notifications.
+    - MAIL_PORT: Port number for the mail server.
+    - MAIL_USE_TLS: Enable TLS for email communication.
+    - MAIL_USERNAME: Username for the mail server.
+    - MAIL_PASSWORD: Password for the mail server.
+    - ADMINS: List of administrators' email addresses.
+    - SWAGGER: Configuration for Swagger API documentation.
+
+    Please set the required environment variables in the .env file for certain configurations.
+    """
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SCHEDULER_API_ENABLED = True
     SECRET_KEY = os.environ.get("SECRET_KEY")

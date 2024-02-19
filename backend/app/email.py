@@ -1,4 +1,10 @@
-"""Utility functions related to email."""
+"""
+email.py
+
+This file contains utility functions related to sending emails and scheduling email jobs
+using Flask-Mail and APScheduler. It also includes a function for sending a password reset
+email.
+"""
 
 from app import mail, scheduler
 from flask import current_app, render_template
@@ -6,6 +12,18 @@ from flask_mail import Message
 
 
 def send_email(app, subject, sender, recipients, text_body, html_body):
+    """
+    Send an email with both text and HTML bodies.
+
+    Args:
+    - app: The Flask application instance.
+    - subject: The subject of the email.
+    - sender: The sender's email address.
+    - recipients: List of recipient email addresses.
+    - text_body: The plain text body of the email.
+    - html_body: The HTML body of the email.
+    """
+
     with app.app_context():
         msg = Message(subject=subject, sender=sender, recipients=recipients)
         msg.body = text_body
@@ -14,6 +32,14 @@ def send_email(app, subject, sender, recipients, text_body, html_body):
 
 
 def send_password_reset_email(token, user):
+    """
+    Send a password reset email to a user.
+
+    Args:
+    - token: The password reset token.
+    - user: The user to whom the email is sent.
+    """
+
     token = token
     send_email(
         app=current_app,
@@ -26,6 +52,14 @@ def send_password_reset_email(token, user):
 
 
 def schedule_email(occasion, action="CREATE"):
+    """
+    Schedule or update an email job based on the occasion's details and action.
+
+    Args:
+    - occasion: The Occasion model instance representing the scheduled email.
+    - action: The action to perform (CREATE, UPDATE, DELETE).
+    """
+
     job_id = str(occasion.id)
 
     if action == "UPDATE" and scheduler.get_job(job_id) is not None:
@@ -42,7 +76,7 @@ def schedule_email(occasion, action="CREATE"):
                 occasion.message_content,
             ],
             id=job_id,
-            misfire_grace_time=2628000,
+            misfire_grace_time=86400,
         )
     elif action == "DELETE" and scheduler.get_job(job_id) is not None:
         scheduler.remove_job(id=job_id)
@@ -60,5 +94,5 @@ def schedule_email(occasion, action="CREATE"):
                 occasion.message_content,
             ],
             id=job_id,
-            misfire_grace_time=2628000,
+            misfire_grace_time=86400,
         )

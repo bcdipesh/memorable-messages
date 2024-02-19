@@ -1,4 +1,20 @@
-"""users routes."""
+"""
+users.py
+
+This file defines API routes related to user management for the Memorable Messages Web Application.
+It includes functionalities for retrieving user information, updating user details,
+deleting users, and managing occasions associated with a user.
+
+Routes:
+- /users: Retrieve a list of all users (requires admin privileges).
+- /users/<int:id>: Retrieve details of a specific user.
+- /users/<int:id>: Delete a specific user.
+- /users/<int:id>: Update details of a specific user.
+- /users/<int:id>/occasions: Retrieve occasions associated with a specific user.
+- /users/<int:id>/occasions: Create a new occasion for a specific user.
+
+This file serves as the user-related API endpoints for the application.
+"""
 
 import sqlalchemy as sa
 from app import db

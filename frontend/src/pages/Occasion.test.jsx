@@ -5,6 +5,7 @@ import { render } from "@testing-library/react";
 
 import Occasion from "@/pages/Occasion";
 
+// Smoke test
 test("Renders without crashing", function () {
   render(
     <BrowserRouter>
@@ -13,6 +14,7 @@ test("Renders without crashing", function () {
   );
 });
 
+// Snapshot test
 test("Matches snapshot", function () {
   const { asFragment } = render(
     <BrowserRouter>

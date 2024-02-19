@@ -1,4 +1,23 @@
-"""occasions routes."""
+"""
+api/occasions.py
+
+This file defines API routes related to occasions in the Memorable Messages Web Application.
+It includes endpoints for retrieving, creating, updating, and deleting occasions,
+as well as retrieving delivery histories associated with occasions.
+
+Routes:
+- /occasions: Retrieve a list of all user-created occasions.
+- /occasions/<int:id>: Retrieve details of a specific occasion by ID.
+- /occasions/<int:id>: Delete a specific occasion by ID.
+- /occasions/<int:id>: Update details of a specific occasion by ID.
+- /occasions/<int:id>/delivery-histories: Retrieve delivery histories for a specific occasion.
+
+This file uses Flask, SQLAlchemy, and Flask-JWT-Extended for handling HTTP requests,
+database interactions, and JWT-based authentication.
+
+Note: JWT (JSON Web Token) authentication is required for some routes, ensuring
+authorization and protection of user-specific data.
+"""
 
 import sqlalchemy as sa
 from app import db

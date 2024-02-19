@@ -1,4 +1,12 @@
-"""delivery_histoires routes."""
+"""
+delivery_histories.py
+
+This file defines the API routes related to delivery histories for the Memorable Messages Web Application.
+It includes functionality to retrieve all delivery histories, accessible only to admin users.
+
+Routes:
+- /delivery-histories: Endpoint to retrieve all delivery histories.
+"""
 
 import sqlalchemy as sa
 from app import db

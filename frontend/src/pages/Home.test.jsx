@@ -5,19 +5,21 @@ import { render } from "@testing-library/react";
 
 import Home from "@/pages/Home";
 
+// Smoke test
 test("Renders without crashing", function () {
   render(
     <BrowserRouter>
       <Home />
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 });
 
+// Snapshot test
 test("Matches snapshot", function () {
   const { asFragment } = render(
     <BrowserRouter>
       <Home />
-    </BrowserRouter>
+    </BrowserRouter>,
   );
   expect(asFragment()).toMatchSnapshot();
 });

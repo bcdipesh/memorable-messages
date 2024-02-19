@@ -5,6 +5,7 @@ import { render } from "@testing-library/react";
 
 import Login from "@/pages/Login";
 
+// Smoke test
 test("Renders without crashing", function () {
   render(
     <BrowserRouter>
@@ -13,6 +14,7 @@ test("Renders without crashing", function () {
   );
 });
 
+// Snapshot test
 test("Matches snapshot", function () {
   const { asFragment } = render(
     <BrowserRouter>

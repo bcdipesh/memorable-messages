@@ -1,3 +1,13 @@
+"""
+test_app.py
+
+This file contains unit tests for the Flask application 'app' using the unittest framework.
+It covers various aspects of the application, including models, authentication routes,
+user-related routes, occasion-related routes, and delivery history-related routes.
+
+Each test case class focuses on specific functionalities within the application.
+"""
+
 import unittest
 from datetime import datetime, timezone
 
@@ -7,6 +17,7 @@ from app.models import DeliveryHistory, Occasion, User
 from config import Config
 
 
+# Test configuration with a separate database for testing
 class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = (
@@ -14,6 +25,7 @@ class TestConfig(Config):
     )
 
 
+# Test case for models
 class ModelsTestCase(unittest.TestCase):
     def setUp(self):
         # Set up the Flask app for testing
@@ -29,15 +41,15 @@ class ModelsTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
+    # Test user password hashing and checking
     def test_user_password_hash(self):
-        # Test user password hashing and checking
         u = User(username="test", email="test@gmail.com")
         u.set_password("test")
         self.assertFalse(u.check_password("Test"))
         self.assertTrue(u.check_password("test"))
 
+    # Test the to_dict method of the User model
     def test_user_to_dict(self):
-        # Test the to_dict method of the User model
         u = User(username="test", email="test@gmail.com")
         u.set_password("test")
         user_dict = u.to_dict(include_email=True)
@@ -45,8 +57,8 @@ class ModelsTestCase(unittest.TestCase):
         self.assertEqual(user_dict["email"], "test@gmail.com")
         self.assertTrue("password_hash" not in user_dict)
 
+    # Test the to_dict method of the Occasion model
     def test_occasion_to_dict(self):
-        # Test the to_dict method of the Occasion model
         user = User(username="test", email="test@gmail.com")
         occasion = Occasion(
             user=user,
@@ -61,8 +73,8 @@ class ModelsTestCase(unittest.TestCase):
         self.assertEqual(occasion_dict["occasion_type"], "birthday")
         self.assertTrue("message_content" in occasion_dict)
 
+    # Test the to_dict method of the DeliveryHistory model
     def test_delivery_history_to_dict(self):
-        # Test the to_dict method of the DeliveryHistory model
         user = User(username="test", email="test@gmail.com")
         occasion = Occasion(
             user=user,
@@ -78,6 +90,7 @@ class ModelsTestCase(unittest.TestCase):
         self.assertTrue("timestamp" in history_dict)
 
 
+# Test case for authentication routes
 class AuthRoutesTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -90,8 +103,8 @@ class AuthRoutesTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
+    # Test user registration
     def test_register_user(self):
-        # Test user registration
         data = {
             "username": "testuser",
             "email": "testuser@example.com",
@@ -102,8 +115,8 @@ class AuthRoutesTestCase(unittest.TestCase):
         self.assertTrue("user" in response.json)
         self.assertTrue("access_token" in response.json)
 
+    # Test registration with an existing username
     def test_register_existing_user(self):
-        # Test registration with an existing username
         user = User(username="existinguser", email="existinguser@example.com")
         user.set_password("existingpassword")
         db.session.add(user)
@@ -119,8 +132,8 @@ class AuthRoutesTestCase(unittest.TestCase):
         self.assertTrue("error" in response.json)
         self.assertTrue("please use a different username" in response.json["message"])
 
+    # Test user login
     def test_login(self):
-        # Test user login
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -131,8 +144,8 @@ class AuthRoutesTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("access_token" in response.json)
 
+    # Test login with invalid credentials
     def test_login_invalid_credentials(self):
-        # Test login with invalid credentials
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -145,6 +158,7 @@ class AuthRoutesTestCase(unittest.TestCase):
         self.assertTrue("invalid credentials" in response.json["message"])
 
 
+# Test case for user-related routes
 class UsersRoutesTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -157,8 +171,8 @@ class UsersRoutesTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
+    # Test get all users
     def test_get_users(self):
-        # Test get all users
         admin_user = User(username="admin", email="admin@example.com", is_admin=True)
         admin_user.set_password("testpassword")
         user1 = User(username="user1", email="user1@example.com")
@@ -175,8 +189,8 @@ class UsersRoutesTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue("users" in response.json)
 
+    # Test delete user
     def test_delete_user(self):
-        # Test delete user
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -193,8 +207,8 @@ class UsersRoutesTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 204)
         self.assertIsNone(db.session.scalar(sa.select(User).where(User.id == user.id)))
 
+    # Test get user by ID
     def test_get_user(self):
-        # Test get user by ID
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -212,8 +226,8 @@ class UsersRoutesTestCase(unittest.TestCase):
         self.assertTrue("testuser" in response.json["username"])
         self.assertTrue("testuser@example.com" in response.json["email"])
 
+    # Test update user by ID
     def test_update_user(self):
-        # Test update user by ID
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -236,8 +250,8 @@ class UsersRoutesTestCase(unittest.TestCase):
         self.assertEqual(response.json["username"], updated_data["username"])
         self.assertEqual(response.json["email"], updated_data["email"])
 
+    # Test get user occasions
     def test_user_occasions(self):
-        # Test get user occasions
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -267,8 +281,8 @@ class UsersRoutesTestCase(unittest.TestCase):
         self.assertTrue("occasions" in response.json)
         self.assertEqual(len(response.json["occasions"]), 1)
 
+    # Test create user occasion
     def test_create_user_occasion(self):
-        # Test create user occasion
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -298,6 +312,7 @@ class UsersRoutesTestCase(unittest.TestCase):
         )
 
 
+# Test case for occasion-related routes
 class OccasionsRoutesTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -310,8 +325,8 @@ class OccasionsRoutesTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
+    # Test get all occasions
     def test_get_occasions(self):
-        # Test get all occasions
         user = User(username="testuser", email="testuser@example.com", is_admin=True)
         user.set_password("testpassword")
         db.session.add(user)
@@ -340,8 +355,8 @@ class OccasionsRoutesTestCase(unittest.TestCase):
         self.assertTrue("occasions" in response.json)
         self.assertEqual(len(response.json["occasions"]), 1)
 
+    # Test delete occasion by ID
     def test_delete_occasion(self):
-        # Test delete occasion by ID
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -372,8 +387,8 @@ class OccasionsRoutesTestCase(unittest.TestCase):
             db.session.scalar(sa.select(Occasion).where(Occasion.id == occasion.id))
         )
 
+    # Test get occasion by ID
     def test_get_occasion(self):
-        # Test get occasion by ID
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -405,8 +420,8 @@ class OccasionsRoutesTestCase(unittest.TestCase):
             response.json["occasion"]["occasion_type"], occasion.occasion_type
         )
 
+    # Test update occasion by ID
     def test_update_occasion(self):
-        # Test update occasion by ID
         user = User(username="testuser", email="testuser@example.com")
         user.set_password("testpassword")
         db.session.add(user)
@@ -450,8 +465,8 @@ class OccasionsRoutesTestCase(unittest.TestCase):
             updated_data["delivery_method"],
         )
 
+    # Test get occasion delivery histories
     def test_occasion_delivery_histories(self):
-        # Test get occasion delivery histories
         user = User(username="testuser", email="testuser@example.com", is_admin=True)
         user.set_password("testpassword")
         db.session.add(user)
@@ -485,6 +500,7 @@ class OccasionsRoutesTestCase(unittest.TestCase):
         self.assertEqual(len(response.json["delivery_histories"]), 1)
 
 
+# Test case for delivery history-related routes
 class DeliveryHistoriesRoutesTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -497,8 +513,8 @@ class DeliveryHistoriesRoutesTestCase(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
+    # Test get all delivery histories
     def test_delivery_histories(self):
-        # Test get all delivery histories
         admin_user = User(
             username="adminuser", email="adminuser@example.com", is_admin=True
         )
