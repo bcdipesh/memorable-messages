@@ -4,10 +4,14 @@
 
 Memorable Messages is a web application that allows users to create, store, and share personalized messages. It utilizes a REST API built with Flask (backend) and a React application (frontend) built with Vite.
 
+You can access to the live site through this [link](https://memorable-messages.netlify.app/)
+
+To learn more about the API that powers this application. Please visit this [link](https://memorable-messages-api.onrender.com/api-docs)
+
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
-   - [Prerequisites](#prerequisites)
+   - [Tech Stack and Prerequisites](#tech-stack-and-prerequisites)
    - [Installation](#installation)
 2. [Project Structure](#project-structure)
 
@@ -15,15 +19,31 @@ Memorable Messages is a web application that allows users to create, store, and 
 
 4. [Running the Application](#running-the-application)
 
-5. [Usage](#usage)
+5. [Running tests](#running-tests)
 
-6. [Features](#features)
+6. [Usage](#usage)
 
-7. [License](#license)
+7. [Features and Explanation](#features-and-explanation)
+
+8. [License](#license)
 
 ## Getting Started
 
-### Prerequisites
+### Tech Stack and Prerequisites
+
+The following tech stack was used to build this project:
+
+#### **Frontend**
+
+- **JavaScript (ES6+):** Used for client-side scripting, enhancing the interactivity and dynamic features of the application.
+- **React.js:** Chosen as the frontend library to build a modular and efficient user interface.
+- **Tailwindcss:** A utility-first CSS framework used for styling, providing a highly customizable and responsive design approach.
+
+#### **Backend**
+
+- **Python (3.6):** Used as the backend programming language for its versatility and readability.
+- **Flask:** A lightweight and flexible web framework for building APIs and web applications.
+- **PostgreSQL:** Chosen as the relational database for its robustness and support for complex queries.
 
 Before you begin, make sure you have the following installed on your system:
 
@@ -166,20 +186,87 @@ The application will start and be accessible at `http://localhost:5173/` in your
 
 API docs are available at `http://localhost:5000/api-docs` in your web browser.
 
+## Running tests
+
+Tests for the backend API are included inside the `memorabe-messages/backend/tests.py` file. To run the tests execute the following command in your terminal:
+
+```bash
+cd memorable-messages/backend
+python tests.py
+# On Windows you may have to replace "/" with "\"
+```
+
+Tests for the frontend are colocated with their respective components iniside the `memorable-messages/src/pages` directory. To run the tests execute the following command in your terminal:
+
+```bash
+cd memorable-messages/frontend
+npm run test
+# On Windows you may have to replace "/" with "\"
+```
+
+The application will start and be accessible at `http://localhost:5173/` in your web browser.
+
+API docs are available at `http://localhost:5000/api-docs` in your web browser.
+
 ## Usage
 
-1. Access the homepage and choose whether to log in or register an account.
-2. Once logged in, you can create new occasions by specifying the content and customization options.
-3. Created occasions can be modified, deleted, or viewed on the occasions page.
-4. Additionally, you can change your profile details and update your password.
+- Access the homepage and choose whether to log in or register an account.
+- Once logged in, you can create new occasions by specifying the content and customization options.
+- Created occasions can be modified, deleted, or viewed on the occasions page.
+- Additionally, you can change your profile details and update your password.
 
-## Features
+## Features and Explanation
 
-- User registration and login functionality.
-- Custom occasions.
-- Secure storage of user passwords and data.
-- User-friendly interface.
-- Additional features (stretch goals) may include repeated occasions.
+1. **User Registration and Login Functionality:**
+
+   - Allows users to register accounts and log in securely.
+   - Enhances user experience by providing personalized access.
+
+2. **Custom Occasions:**
+
+   - Enables users to create and customize occasions based on their preferences.
+   - Adds a personalized touch to the application, making it more versatile.
+
+3. **Secure Storage of User Passwords and Data:**
+
+   - Implements robust security measures to ensure the safe storage of user passwords and sensitive data.
+   - Prioritizes user privacy and data protection.
+
+4. **User-Friendly Interface:**
+
+   - Designs an intuitive and user-friendly interface for a seamless user experience.
+   - Enhances accessibility and overall satisfaction for users interacting with the application.
+
+### Additional Features (Stretch Goals)
+
+1. **Repeated Occasions:**
+   - Includes the ability to set and manage repeated occasions for users who have recurring events.
+   - Enhances the application's functionality by addressing a broader range of user needs.
+
+### Explanation
+
+The implemented features were chosen to address fundamental aspects of user interaction and security while using the application. Here's a brief explanation of why each feature was included:
+
+- **User Registration and Login Functionality:**
+
+  - This is essential for providing personalized services to users and ensuring a secure environment for their data.
+
+- **Custom Occasions:**
+
+  - Adding the ability to create custom occasions enhances the application's flexibility, allowing users to tailor their experience according to their specific needs.
+
+- **Secure Storage of User Passwords and Data:**
+
+  - Security is a top priority to protect user information, instilling trust and confidence in the application.
+
+- **User-Friendly Interface:**
+
+  - A user-friendly interface is crucial for a positive user experience, reducing the learning curve and making the application accessible to a wider audience.
+
+- **Repeated Occasions (Stretch Goal):**
+  - Including the option for repeated occasions adds an extra layer of convenience for users with recurring events, enhancing the application's overall utility.
+
+These features collectively contribute to a well-rounded and user-centric application, meeting both essential and potential user requirements.
 
 ## License
 
