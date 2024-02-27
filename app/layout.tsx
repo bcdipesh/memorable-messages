@@ -9,7 +9,10 @@ import Footer from "./footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Memorable Messages",
+  title: {
+    template: "%s | Memorable Messages",
+    default: "Memorable Messages",
+  },
   description:
     "Web application that allows users to create, store, and share personalized messages by creating custom occasions.",
 };
@@ -50,6 +53,7 @@ export default function RootLayout({
             ))}
           </div>
         </nav>
+
         {children}
 
         {/* Footer with copyright and links */}
