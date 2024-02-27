@@ -1,6 +1,11 @@
 import SignupForm from "@/components/ui/auth/signup-form";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "SignUp",
+};
 
 export default function Signup(): JSX.Element {
   return (
