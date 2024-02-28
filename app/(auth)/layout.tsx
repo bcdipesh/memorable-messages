@@ -8,7 +8,7 @@ export default function AuthLayout({
   return (
     <main className="grid min-h-[60vh] gap-10 md:grid-cols-2">
       {/* Left container: quotes */}
-      <div className="hidden w-full flex-col rounded bg-foreground md:flex">
+      <div className="hidden w-full flex-col rounded bg-zinc-950 md:flex">
         <Quote />
       </div>
 

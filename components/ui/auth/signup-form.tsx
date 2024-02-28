@@ -77,7 +77,7 @@ export default function SignupForm(): JSX.Element {
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </Form>
   );
