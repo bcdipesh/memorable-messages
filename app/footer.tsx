@@ -9,7 +9,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col space-y-6 pb-16">
+    <footer className="flex flex-col space-y-6">
       <Separator />
       {/* Top row: Logo and navigation links */}
       <div className="flex flex-col justify-between md:flex-row">

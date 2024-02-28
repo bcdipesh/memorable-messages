@@ -1,24 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import Logo from "./logo";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { Button } from "@/components/ui/button";
+import "./globals.css";
 import Footer from "./footer";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: {
-    template: "%s | Memorable Messages",
-    default: "Memorable Messages",
-  },
-  description:
-    "Web application that allows users to create, store, and share personalized messages by creating custom occasions.",
-};
-
 // Map of links to display in the navigation bar.
-const navLinks: {
+export const navLinks: {
   name: string;
   href: string;
 }[] = [
@@ -31,6 +20,16 @@ const navLinks: {
     href: "/signup",
   },
 ];
+export const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Memorable Messages",
+    default: "Memorable Messages",
+  },
+  description:
+    "Web application that allows users to create, store, and share personalized messages by creating custom occasions.",
+};
 
 export default function RootLayout({
   children,
@@ -40,14 +39,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} container flex min-h-screen flex-col justify-between pt-6`}
+        className={`${inter.className} container flex min-h-screen flex-col justify-between py-8`}
       >
         {/* Navigation bar */}
         <nav className="flex flex-col justify-between space-y-6 md:flex-row md:space-y-0">
           <Logo />
           <div className="flex space-x-6">
             {navLinks.map((navLink) => (
-              <Button variant="ghost" key={navLink.name}>
+              <Button variant="ghost" key={navLink.name} asChild>
                 <Link href={navLink.href}>{navLink.name}</Link>
               </Button>
             ))}
