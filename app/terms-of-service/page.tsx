@@ -20,12 +20,13 @@ export default function TermsOfService(): JSX.Element {
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
             Welcome to Memorable Messages, a platform for creating and sharing
-            memorable messages. These Terms of Service ("Terms") outline the
-            rules and regulations governing your use of the website ("Website")
-            and the services offered by Dipesh B C ("I", "me", or "us"). By
-            accessing or using the Website, you agree to be bound by these
-            Terms. If you disagree with any part of these Terms, you may not
-            access or use the Website.
+            memorable messages. These Terms of Service (&quot;Terms&quot;)
+            outline the rules and regulations governing your use of the website
+            (&quot;Website&quot;) and the services offered by Dipesh B C
+            (&quot;I&quot;, &quot;me&quot;, or &quot;us&quot;). By accessing or
+            using the Website, you agree to be bound by these Terms. If you
+            disagree with any part of these Terms, you may not access or use the
+            Website.
           </p>
         </li>
         <li>
@@ -87,11 +88,11 @@ export default function TermsOfService(): JSX.Element {
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
             You are responsible for all content you upload, post, or share on
-            the Website ("User Content"). You retain all ownership rights to
-            your User Content, but by submitting it to the Website, you grant us
-            a non-exclusive, royalty-free license to use, reproduce, modify,
-            publish, and distribute your User Content on the Website and other
-            platforms operated by us.
+            the Website (&quot;User Content&quot;). You retain all ownership
+            rights to your User Content, but by submitting it to the Website,
+            you grant us a non-exclusive, royalty-free license to use,
+            reproduce, modify, publish, and distribute your User Content on the
+            Website and other platforms operated by us.
           </p>
         </li>
         <li>
@@ -123,10 +124,10 @@ export default function TermsOfService(): JSX.Element {
             8. Disclaimer
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
-            The Website is provided on an "as is" and "as available" basis. We
-            make no representations or warranties, express or implied, regarding
-            the operation or performance of the Website. You use the Website at
-            your own risk.
+            The Website is provided on an &quot;as is&quot; and &quot;as
+            available&quot; basis. We make no representations or warranties,
+            express or implied, regarding the operation or performance of the
+            Website. You use the Website at your own risk.
           </p>
         </li>
         <li>

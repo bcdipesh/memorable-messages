@@ -11,8 +11,8 @@ export default function Quote(): JSX.Element {
         <>
           {" "}
           <p>
-            "Never underestimate the power of a meaningful message. Login to
-            reconnect with loved onces and create memories that last."
+            &quot;Never underestimate the power of a meaningful message. Login
+            to reconnect with loved onces and create memories that last.&quot;
           </p>
           <footer>Dipesh B C</footer>
         </>
@@ -21,8 +21,8 @@ export default function Quote(): JSX.Element {
         <>
           {" "}
           <p>
-            "Your loved onces deserve heartfelt messages. Sign Up to create
-            personalized reminders of your love and appreciation."
+            &quot;Your loved onces deserve heartfelt messages. Sign Up to create
+            personalized reminders of your love and appreciation.&quot;
           </p>
           <footer>Dipesh B C</footer>
         </>

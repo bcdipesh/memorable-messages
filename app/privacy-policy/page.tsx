@@ -87,7 +87,7 @@ export default function PrivacyPolicy(): JSX.Element {
         </li>
         <li>
           <h2 className="border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-            7. Children's Privacy
+            7. Children&apos;s Privacy
           </h2>
           <p className="leading-7 [&:not(:first-child)]:mt-6">
             The Website is not directed towards children under the age of 18. We

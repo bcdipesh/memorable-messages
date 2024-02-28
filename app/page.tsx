@@ -13,7 +13,7 @@ export default function Home() {
       {/* Page heading and caption */}
       <div className="col-span-full md:col-end-3 md:row-start-1">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Capture life's precious moments with heartfelt messages that last
+          Capture life&apos;s precious moments with heartfelt messages that last
         </h1>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
           Create personalized messages for birthdays, anniversaries, holidays,
