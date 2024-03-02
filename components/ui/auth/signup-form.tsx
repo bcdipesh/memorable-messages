@@ -1,6 +1,6 @@
 "use client";
 
-import { signUpSchema } from "@/app/lib/validations";
+import { signUpSchema } from "@/lib/validations";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { signUp } from "@/lib/actions";
 
 export default function SignupForm(): JSX.Element {
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -25,8 +26,8 @@ export default function SignupForm(): JSX.Element {
     },
   });
 
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values);
+  async function onSubmit(formData: z.infer<typeof signUpSchema>) {
+    await signUp(formData);
   }
 
   return (
@@ -71,7 +72,7 @@ export default function SignupForm(): JSX.Element {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="password..." {...field} />
+                <Input type="password" placeholder="password..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
