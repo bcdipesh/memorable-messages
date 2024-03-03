@@ -1,11 +1,12 @@
-import type { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/db";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import type { NextAuthOptions } from "next-auth";
+import EmailProvider from "next-auth/providers/email";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET ?? "",
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID ?? "",
@@ -23,5 +24,4 @@ export const authOptions = {
       from: process.env.EMAIL_FROM,
     }),
   ],
-  adapter: PrismaAdapter(prisma),
 } satisfies NextAuthOptions;

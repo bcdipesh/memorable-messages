@@ -1,6 +1,6 @@
-import { authOptions } from "@/auth.config";
-import LoginWithEmail from "@/components/ui/auth/email-login";
-import LoginWithGoogleBtn from "@/components/ui/auth/google-login";
+import { authOptions } from "@/auth";
+import LoginWithEmail from "@/components/auth/email-login";
+import LoginWithGoogleBtn from "@/components/auth/google-login";
 import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

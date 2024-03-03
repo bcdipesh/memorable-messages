@@ -1,10 +1,11 @@
+import ThemeProvider from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+
 import Footer from "./footer";
-import ThemeProvider from "@/components/theme-provider";
+import "./globals.css";
 import NavBar from "./nav-bar";
-import { Toaster } from "@/components/ui/toaster";
 
 export const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     "Web application that allows users to create, store, and share personalized messages by creating custom occasions.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -1,9 +1,10 @@
 "use client";
 
-import Logo from "./logo";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+
+import Logo from "./logo";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();

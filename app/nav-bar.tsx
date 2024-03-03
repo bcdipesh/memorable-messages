@@ -1,10 +1,11 @@
-import ToggleTheme from "@/components/ui/toggle-theme";
+import { authOptions } from "@/auth";
+import LogOutBtn from "@/components/auth/signout-btn";
 import { Button } from "@/components/ui/button";
-import Logo from "./logo";
-import Link from "next/link";
-import { authOptions } from "@/auth.config";
+import ToggleTheme from "@/components/ui/toggle-theme";
 import { getServerSession } from "next-auth";
-import LogOutBtn from "@/components/ui/auth/signout-btn";
+import Link from "next/link";
+
+import Logo from "./logo";
 
 export default async function NavBar() {
   const session = await getServerSession(authOptions);
