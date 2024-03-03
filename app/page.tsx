@@ -2,20 +2,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Home",
 };
 
 export default async function Home() {
-  const session = await getServerSession();
-
-  if (!session || !session.user) {
-    redirect("/login");
-  }
-
   return (
     <main className="my-6 grid grid-cols-3 gap-6 space-y-6">
       {/* Page heading and caption */}
@@ -42,10 +34,10 @@ export default async function Home() {
 
       {/* Call to action */}
       <p className="col-span-full leading-7 [&:not(:first-child)]:mt-6">
-        Sign Up for free and start sending memorable messages today!
+        Click on the Start now button to start sending memorable messages today!
       </p>
       <Button asChild className="w-fit">
-        <Link href="/signup">Sign Up</Link>
+        <Link href="/occasions">Start now</Link>
       </Button>
     </main>
   );

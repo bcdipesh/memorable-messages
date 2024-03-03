@@ -1,36 +1,27 @@
-"use client";
-
-import { signOut, useSession } from "next-auth/react";
 import ToggleTheme from "@/components/ui/toggle-theme";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Logo from "./logo";
 import Link from "next/link";
+import { authOptions } from "@/auth.config";
+import { getServerSession } from "next-auth";
+import LogOutBtn from "@/components/ui/auth/signout-btn";
 
-export default function NavBar() {
-  const { data: session } = useSession();
-
-  console.log(session);
+export default async function NavBar() {
+  const session = await getServerSession(authOptions);
 
   return (
-    <nav className="flex flex-col justify-between space-y-6 md:flex-row md:space-y-0">
+    <nav className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
       <Logo />
-      <div className="flex space-x-6">
+      <div className="flex items-center space-x-6">
         {session?.user?.name && (
-          <Button
-            variant="ghost"
-            onClick={() => signOut()}
-            className="flex items-center p-6"
-          >
-            <Avatar className="mr-4">
-              <AvatarImage src={session.user.image} alt={session.user.name} />
-            </Avatar>
-            Sign Out
-          </Button>
+          <LogOutBtn
+            imageUrl={session.user.image ?? ""}
+            name={session.user.name}
+          />
         )}
         {!session && (
           <Button variant="ghost" asChild>
-            <Link href="/login">Sign In</Link>
+            <Link href="/login">Login</Link>
           </Button>
         )}
         <ToggleTheme />

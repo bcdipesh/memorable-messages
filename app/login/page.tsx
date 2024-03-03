@@ -1,11 +1,21 @@
+import { authOptions } from "@/auth.config";
+import LoginWithEmail from "@/components/ui/auth/email-login";
 import LoginWithGoogleBtn from "@/components/ui/auth/google-login";
 import { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Login",
 };
 
-export default function Login(): JSX.Element {
+export default async function Login() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return redirect("/");
+  }
+
   return (
     <main className="grid min-h-[60vh] gap-10 md:grid-cols-2">
       {/* Left container: quotes */}
@@ -24,9 +34,10 @@ export default function Login(): JSX.Element {
             Login to your account
           </h1>
           <p className="text-xl text-muted-foreground">
-            Choose one of the following providers to continue
+            Choose one of the following ways to continue
           </p>
         </div>
+        <LoginWithEmail />
         <LoginWithGoogleBtn />
       </div>
     </main>

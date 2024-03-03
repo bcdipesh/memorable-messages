@@ -8,11 +8,15 @@ export default function LoginWithGoogleBtn() {
   return (
     <Button
       variant="ghost"
-      onClick={() => signIn()}
+      onClick={() =>
+        signIn("google", {
+          callbackUrl: `${window.location.origin}`,
+        })
+      }
       className="flex w-fit items-center"
     >
       <Image className="pr-2" src="/google.svg" alt="" width={35} height={35} />
-      Continue with Google
+      Login with Google
     </Button>
   );
 }

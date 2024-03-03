@@ -14,12 +14,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-enum Status {
-  PENDING
-  DELIVERED
-  FAILED
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -48,14 +42,13 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?    @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Occasion      Occasion[]
 }
 
 model VerificationToken {
@@ -64,27 +57,4 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-model Occasion {
-  id                String            @id @default(cuid())
-  userId            String
-  deliveryMethod    String            @db.VarChar(64)
-  occasionType      String            @db.VarChar(256)
-  messageContent    String
-  isRepeated        Boolean           @default(false)
-  dateTime          DateTime          @db.Timestamptz(6)
-  createdAt         DateTime          @db.Timestamptz(6)
-  receiverEmail     String?           @db.VarChar(120)
-  receiverPhone     String?           @db.VarChar(15)
-  deliveryHistories DeliveryHistory[]
-  users             User              @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-}
-
-model DeliveryHistory {
-  id         String   @id @default(cuid())
-  occasionId String
-  status     Status
-  timestamp  DateTime @db.Timestamptz(6)
-  occasions  Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }

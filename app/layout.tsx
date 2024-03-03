@@ -4,8 +4,7 @@ import "./globals.css";
 import Footer from "./footer";
 import ThemeProvider from "@/components/theme-provider";
 import NavBar from "./nav-bar";
-import SessionProvider from "@/components/session-provider";
-import { getServerSession } from "next-auth";
+import { Toaster } from "@/components/ui/toaster";
 
 export const inter = Inter({ subsets: ["latin"] });
 
@@ -23,27 +22,24 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
-
   return (
     <html lang="en">
       <body
         className={`${inter.className} container relative flex min-h-screen flex-col justify-between py-8`}
       >
-        <SessionProvider session={session}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {/* Navigation bar */}
-            <NavBar />
-            {children}
-            {/* Footer with copyright and links */}
-            <Footer />
-          </ThemeProvider>
-        </SessionProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* Navigation bar */}
+          <NavBar />
+          {children}
+          {/* Footer with copyright and links */}
+          <Footer />
+        </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
