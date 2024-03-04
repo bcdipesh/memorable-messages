@@ -1,5 +1,6 @@
 "use client";
 
+import { Occasion, data } from "@/app/occasions/data";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -37,65 +38,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Link from "next/link";
-import * as React from "react";
-
-const data: Occasion[] = [
-  {
-    id: "m5gr84i9",
-    occasionType: "anniversary",
-    status: "success",
-    receiverEmail: "ken99@yahoo.com",
-    deliveryMethod: "email",
-    deliveryDateAndTime: "2024/03/03",
-    createdAt: "2024/03/03",
-  },
-  {
-    id: "3u1reuv4",
-    occasionType: "anniversary",
-    status: "success",
-    receiverEmail: "Abe45@gmail.com",
-    deliveryMethod: "email",
-    deliveryDateAndTime: "2024/03/03",
-    createdAt: "2024/03/03",
-  },
-  {
-    id: "derv1ws0",
-    occasionType: "anniversary",
-    status: "processing",
-    receiverEmail: "Monserrat44@gmail.com",
-    deliveryMethod: "email",
-    deliveryDateAndTime: "2024/03/03",
-    createdAt: "2024/03/03",
-  },
-  {
-    id: "5kma53ae",
-    occasionType: "anniversary",
-    status: "success",
-    receiverEmail: "Silas22@gmail.com",
-    deliveryMethod: "email",
-    deliveryDateAndTime: "2024/03/03",
-    createdAt: "2024/03/03",
-  },
-  {
-    id: "bhqecj4p",
-    occasionType: "anniversary",
-    status: "failed",
-    receiverEmail: "carmella@hotmail.com",
-    deliveryMethod: "email",
-    deliveryDateAndTime: "2024/03/03",
-    createdAt: "2024/03/03",
-  },
-];
-
-export type Occasion = {
-  id: string;
-  occasionType: string;
-  status: "pending" | "processing" | "success" | "failed";
-  receiverEmail: string;
-  deliveryMethod: "email" | "sms";
-  deliveryDateAndTime: string;
-  createdAt: string;
-};
+import { useState } from "react";
 
 export const columns: ColumnDef<Occasion>[] = [
   {
@@ -130,8 +73,8 @@ export const columns: ColumnDef<Occasion>[] = [
     ),
   },
   {
-    accessorKey: "occasionType",
-    header: "Occasion Type",
+    accessorKey: "title",
+    header: "Occasion Title",
   },
   {
     accessorKey: "deliveryMethod",
@@ -186,8 +129,6 @@ export const columns: ColumnDef<Occasion>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -199,7 +140,9 @@ export const columns: ColumnDef<Occasion>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem className="cursor-pointer">
-              Edit Occasion
+              <Link href={`occasions/${row.original.id}/update`}>
+                Update Occasion
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">
               Delete Occasion
@@ -212,13 +155,10 @@ export const columns: ColumnDef<Occasion>[] = [
 ];
 
 export default function OccasionsTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
