@@ -28,16 +28,26 @@ export default async function Login() {
       </div>
 
       {/* Login */}
-      <div className="flex flex-col justify-center space-y-6">
-        <div className="space-y-4">
+      <div className="flex flex-col justify-center space-y-6 mx-auto">
+        <div className="space-y-4 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
             Login to your account
           </h1>
           <p className="text-xl text-muted-foreground">
-            Choose one of the following ways to continue
+            Enter your email below to login
           </p>
         </div>
         <LoginWithEmail />
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t"></span>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
         <LoginWithGoogleBtn />
       </div>
     </main>

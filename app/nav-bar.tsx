@@ -15,10 +15,15 @@ export default async function NavBar() {
       <Logo />
       <div className="flex items-center space-x-6">
         {session?.user?.name && (
-          <LogOutBtn
-            imageUrl={session.user.image ?? ""}
-            name={session.user.name}
-          />
+          <>
+            <Button variant="ghost" asChild>
+              <Link href="/occasions">Occasions</Link>
+            </Button>
+            <LogOutBtn
+              imageUrl={session.user.image ?? ""}
+              name={session.user.name}
+            />
+          </>
         )}
         {!session && (
           <Button variant="ghost" asChild>

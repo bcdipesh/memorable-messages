@@ -7,13 +7,13 @@ import Image from "next/image";
 export default function LoginWithGoogleBtn() {
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       onClick={() =>
         signIn("google", {
           callbackUrl: `${window.location.origin}`,
         })
       }
-      className="flex w-fit items-center"
+      className="flex w-full items-center"
     >
       <Image className="pr-2" src="/google.svg" alt="" width={35} height={35} />
       Login with Google

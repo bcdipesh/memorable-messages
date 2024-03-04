@@ -59,17 +59,15 @@ export default function LoginWithEmail() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  type="email"
-                  placeholder="example@email.com"
-                  {...field}
-                />
+                <Input type="email" placeholder="name@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Login with Email</Button>
+        <Button type="submit" className="w-full">
+          Login with Email
+        </Button>
       </form>
     </Form>
   );
