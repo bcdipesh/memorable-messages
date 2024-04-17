@@ -2,11 +2,15 @@
 
 ## Project Overview
 
-Memorable Messages is a web application that allows users to create, store, and share personalized messages. It utilizes a REST API built with Flask (backend) and a React application (frontend) built with Vite.
+**Memorable Messages** is a user-friendly web application enabling individuals to craft, save, and exchange personalized messages effortlessly. Utilizing a robust REST API powered by Flask on the backend and a sleek React frontend developed with Vite, it provides a seamless platform for users to create and share meaningful messages with ease.
 
-You can access to the live site through this [link](https://memorable-messages.netlify.app/)
+You can access the live site through this [link](https://memorable-messages.netlify.app/)
 
 To learn more about the API that powers this application. Please visit this [link](https://memorable-messages-api.onrender.com/api-docs)
+
+## Motivation
+
+**Memorable Messages** is a heartfelt solution born out of a personal need to cherish and celebrate special moments with loved ones. Designed to ensure you never miss an opportunity to send warm wishes on those important occasions, this web application seamlessly integrates with Gmail, allowing you to effortlessly share personalized messages with the click of a button. Built with React for a user-friendly frontend and Python/Flask for a robust backend API, **Memorable Messages** not only simplifies the process of remembering and sending heartfelt messages but also elevates the quality of your interactions by infusing them with sincerity and thoughtfulness. Whether it's a birthday, anniversary, or just a simple note to brighten someone's day, this app empowers you to strengthen your connections and make every moment memorable.
 
 ## Table of Contents
 
