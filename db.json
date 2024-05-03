@@ -1,0 +1,49 @@
+{
+  "occasions": [
+    {
+      "id": "1",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
+      "occasionType": "Occasion 1",
+      "receiverEmail": "occasion1@gmail.com",
+      "deliveryMethod": "Email",
+      "dateTime": "04/27/2024 10:20pm",
+      "createdAt": "04/26/2024 10:20pm"
+    },
+    {
+      "id": "2",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
+      "occasionType": "Occasion 2",
+      "receiverEmail": "occasion2@gmail.com",
+      "deliveryMethod": "Email",
+      "dateTime": "04/27/2024 10:20pm",
+      "createdAt": "04/26/2024 10:20pm"
+    },
+    {
+      "id": "3",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
+      "occasionType": "Occasion 3",
+      "receiverEmail": "occasion3@gmail.com",
+      "deliveryMethod": "Email",
+      "dateTime": "04/27/2024 10:20pm",
+      "createdAt": "04/26/2024 10:20pm"
+    },
+    {
+      "id": "4",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
+      "occasionType": "Occasion 4",
+      "receiverEmail": "occasion4@gmail.com",
+      "deliveryMethod": "Email",
+      "dateTime": "04/27/2024 10:20pm",
+      "createdAt": "04/26/2024 10:20pm"
+    },
+    {
+      "id": "5",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
+      "occasionType": "Occasion 5",
+      "receiverEmail": "occasion5@gmail.com",
+      "deliveryMethod": "Email",
+      "dateTime": "04/27/2024 10:20pm",
+      "createdAt": "04/26/2024 10:20pm"
+    }
+  ]
+}

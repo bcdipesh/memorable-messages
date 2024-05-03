@@ -7,7 +7,9 @@ export default function TermsOfServicePage() {
 
   return (
     <div className="terms-of-service d-flex flex-col space-y-6">
-      <h1 className="my-8 text-3xl font-bold">Terms of Service</h1>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
+        Terms of Service
+      </h1>
       <div>
         <p className="mb-4 font-bold underline underline-offset-4">
           1. Acceptance of Terms
