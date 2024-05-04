@@ -37,8 +37,8 @@ export const columns: ColumnDef<Occasion>[] = [
     header: "Delivery Method",
   },
   {
-    accessorKey: "dateTime",
-    header: "Date Time",
+    accessorKey: "deliveryDate",
+    header: "Delivery Date",
   },
   {
     accessorKey: "createdAt",
