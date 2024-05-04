@@ -66,7 +66,7 @@ export const columns: ColumnDef<Occasion>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link to={`/occasions/${occasion.id}`}>
-                View occasion details
+                View/Update occasion details
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

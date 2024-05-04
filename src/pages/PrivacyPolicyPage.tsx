@@ -6,7 +6,7 @@ export default function PrivacyPolicyPage() {
   }, []);
 
   return (
-    <div className="privacy-policy d-flex flex-col space-y-6">
+    <div className="privacy-policy d-flex flex-col space-y-6 grow">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
         Privacy Policy
       </h1>

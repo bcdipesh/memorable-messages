@@ -14,6 +14,7 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -65,6 +66,9 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="rounded-md border">
         <Table>
+          <TableCaption className="mb-4">
+            A list of your occasions.
+          </TableCaption>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

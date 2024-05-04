@@ -99,7 +99,10 @@ export default function OccasionDetailPage() {
   };
 
   return (
-    <div className="occasion-details">
+    <div className="occasion-details w-full grow">
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
+        Occasion Details
+      </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField

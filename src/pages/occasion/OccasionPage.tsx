@@ -32,7 +32,7 @@ export default function OccasionPage() {
 
   if (!isLoaded)
     return (
-      <div className="occasions flex justify-center">
+      <div className="occasions">
         <Button disabled>
           <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
           Please wait
@@ -41,7 +41,10 @@ export default function OccasionPage() {
     );
 
   return (
-    <div className="occasions">
+    <div className="occasions w-full grow">
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
+        Occasions
+      </h1>
       <DataTable columns={columns} data={occasions} />
     </div>
   );

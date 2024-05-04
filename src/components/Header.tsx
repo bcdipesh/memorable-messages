@@ -6,9 +6,9 @@ import { Button } from "./ui/button";
 
 export default function Header() {
   return (
-    <header className="header my-6 md:flex justify-between">
+    <header className="header my-6 flex justify-between">
       <Logo />
-      <nav className="mt-6 md:mt-0">
+      <nav>
         <ul className="flex space-x-4">
           <SignedOut>
             <li>
