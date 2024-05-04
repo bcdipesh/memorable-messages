@@ -4,6 +4,7 @@ export interface Occasion {
   occasionType: string;
   receiverEmail: string;
   deliveryMethod: string;
-  dateTime: string;
+  deliveryDate: string;
+  message: string;
   createdAt: string;
 }

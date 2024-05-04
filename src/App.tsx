@@ -7,6 +7,7 @@ import SignUpPage from "@/pages/SignUpPage";
 import TermsOfServicePage from "@/pages/TermsOfServicePage";
 import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
 import OccasionPage from "@/pages/occasion/OccasionPage";
+import OccasionDetailPage from "@/pages/occasion/OccasionDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/occasions",
         element: <OccasionPage />,
+      },
+      {
+        path: "/occasions/:occasionId",
+        element: <OccasionDetailPage />,
       },
     ],
   },
