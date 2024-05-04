@@ -2,14 +2,15 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 
 import Logo from "@/components/Logo";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import { ThemeToggler } from "@/components/ThemeToggler";
 
 export default function Header() {
   return (
-    <header className="header my-6 flex justify-between">
+    <header className="header my-6 flex justify-between items-center">
       <Logo />
       <nav>
-        <ul className="flex space-x-4">
+        <ul className="flex items-center space-x-4">
           <SignedOut>
             <li>
               <Button asChild variant="ghost">
@@ -23,10 +24,13 @@ export default function Header() {
             </li>
           </SignedOut>
           <SignedIn>
-            <li>
+            <li className="flex items-center">
               <UserButton />
             </li>
           </SignedIn>
+          <li>
+            <ThemeToggler />
+          </li>
         </ul>
       </nav>
     </header>

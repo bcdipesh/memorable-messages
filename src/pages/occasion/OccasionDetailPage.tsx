@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -183,7 +183,12 @@ export default function OccasionDetailPage() {
               </FormItem>
             )}
           />
-          <Button type="submit">Update Occasion</Button>
+          <div className="flex space-x-3">
+            <Button type="submit">Update Occasion</Button>
+            <Button variant="link" asChild>
+              <Link to="/occasions">Go Back</Link>
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

@@ -60,11 +60,12 @@ export const columns: ColumnDef<Occasion>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
+              className="cursor-pointer"
               onClick={() => navigator.clipboard.writeText(occasion.id)}
             >
               Copy occasion ID
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem className="cursor-pointer" asChild>
               <Link to={`/occasions/${occasion.id}`}>
                 View/Update occasion details
               </Link>
