@@ -52,41 +52,11 @@
     },
     {
       "id": "a603",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
       "occasionType": "Occasion 6",
       "receiverEmail": "bcdipeshwork@gmail.com",
       "deliveryMethod": "Email",
       "deliveryDate": "2024-05-06",
-      "message": "Test",
-      "createdAt": "2024-05-05",
-      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt"
-    },
-    {
-      "id": "af08",
-      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
-      "occasionType": "Occasion 7",
-      "receiverEmail": "bcdipeshwork@gmail.com",
-      "deliveryMethod": "Email",
-      "deliveryDate": "2024-05-07",
-      "message": "Test",
-      "createdAt": "2024-05-05"
-    },
-    {
-      "id": "038a",
-      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
-      "occasionType": "Occasion 8",
-      "receiverEmail": "bcdipeshwork@gmail.com",
-      "deliveryMethod": "Email",
-      "deliveryDate": "2024-05-08",
-      "message": "Test",
-      "createdAt": "2024-05-05"
-    },
-    {
-      "id": "cc9d",
-      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt",
-      "occasionType": "Occasion 9",
-      "receiverEmail": "bcdipeshwork@gmail.com",
-      "deliveryMethod": "Email",
-      "deliveryDate": "2024-05-08",
       "message": "Test",
       "createdAt": "2024-05-05"
     }

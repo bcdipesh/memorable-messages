@@ -6,7 +6,7 @@ export default function TermsOfServicePage() {
   }, []);
 
   return (
-    <div className="terms-of-service d-flex flex-col space-y-6 grow">
+    <div className="terms-of-service w-full space-y-6 grow">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
         Terms of Service
       </h1>

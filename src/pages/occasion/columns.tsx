@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
 
 import type { Occasion } from "@/api/types/occasion";
 
@@ -49,6 +50,19 @@ export const columns: ColumnDef<Occasion>[] = [
     cell: ({ row }) => {
       const occasion = row.original;
 
+      const deleteOccasion = async (): Promise<void> => {
+        const response = await fetch(
+          `http://localhost:3000/occasions/${occasion.id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (response.ok) {
+          toast.success("Occasion successfully deleted.");
+        }
+      };
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -69,6 +83,12 @@ export const columns: ColumnDef<Occasion>[] = [
               <Link to={`/occasions/${occasion.id}`}>
                 View/Update occasion details
               </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={deleteOccasion}
+            >
+              Delete occasion
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

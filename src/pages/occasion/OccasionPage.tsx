@@ -30,7 +30,7 @@ export default function OccasionPage() {
     }
   }, [isLoaded]);
 
-  if (!isLoaded)
+  if (!isLoaded) {
     return (
       <div className="occasions">
         <Button disabled>
@@ -39,6 +39,7 @@ export default function OccasionPage() {
         </Button>
       </div>
     );
+  }
 
   return (
     <div className="occasions w-full grow">
