@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { ThemeToggler } from "@/components/ThemeToggler";
+import { ThemeToggler } from "@/components/ui/theme-toggler";
 
 export default function Header() {
   return (
