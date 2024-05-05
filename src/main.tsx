@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 // Import Clerk Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         storageKey="memorable-messages-ui-theme"
       >
         <App />
+        <Toaster />
       </ThemeProvider>
     </ClerkProvider>
   </React.StrictMode>

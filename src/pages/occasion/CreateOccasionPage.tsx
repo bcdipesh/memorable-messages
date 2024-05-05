@@ -1,14 +1,22 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useAuth } from "@clerk/clerk-react";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { ReloadIcon, CalendarIcon } from "@radix-ui/react-icons";
+import { formatISO } from "date-fns";
 import { toast } from "sonner";
 
 import type { Occasion } from "@/api/types/occasion";
 
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,61 +30,42 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  id: z.string().min(1, "Invalid ID."),
-  userId: z.string().min(1, "Invalid User ID."),
   occasionType: z.string().min(1, "Please provide a occasion type."),
   receiverEmail: z.string().email("Please provide a valid email address."),
   deliveryMethod: z.string().min(1, "Invalid Delivery Method."),
   deliveryDate: z
     .string()
-    .date("Please provide a valid date in YYYY-MM-DD format."),
+    .date("Please provide a valid date in YYYY-MM-DD format.")
+    .or(z.date()),
   message: z.string().min(1, "Please provide a message you wish to send."),
   createdAt: z.string().date("Invalid date for Create At."),
 });
 
-export default function OccasionDetailPage() {
-  const [occasion, setOccasion] = useState<Occasion | null>(null);
-  const { occasionId } = useParams();
+export default function CreateOccasion() {
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
 
   const form = useForm<Occasion>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: "",
-      userId: "",
       occasionType: "",
       receiverEmail: "",
-      deliveryMethod: "",
-      deliveryDate: "",
+      deliveryMethod: "Email",
+      deliveryDate: new Date().toISOString().split("T")[0],
       message: "",
-      createdAt: "",
+      createdAt: new Date().toISOString().split("T")[0],
     },
-    values: occasion as Occasion,
   });
 
   useEffect(() => {
     if (isLoaded && !userId) {
       navigate("/sign-in");
     }
-
-    if (isLoaded && userId) {
-      const fetchOccasion = async (): Promise<void> => {
-        const response = await fetch(
-          `http://localhost:3000/occasions/${occasionId}`
-        );
-        const data: Occasion = await response.json();
-
-        setOccasion(data);
-      };
-
-      fetchOccasion();
-    }
-  }, [isLoaded, userId, occasionId]);
+  }, [isLoaded, userId]);
 
   if (!isLoaded) {
     return (
-      <div className="occasion-details flex justify-center">
+      <div className="create-occasion flex justify-center">
         <Button disabled>
           <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
           Please wait
@@ -85,27 +74,31 @@ export default function OccasionDetailPage() {
     );
   }
 
-  const updateOccasion = async (updatedData: Occasion): Promise<void> => {
-    await fetch(`http://localhost:3000/occasions/${occasionId}`, {
-      method: "PUT",
+  const createOccasion = async (newOccasion: Occasion): Promise<void> => {
+    await fetch("http://localhost:3000/occasions", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(newOccasion),
     });
 
-    toast.success("Occasion updated successfully.");
+    toast.success("Occasion created successfully.", {
+      description: `${newOccasion.occasionType}, ${newOccasion.deliveryDate}`,
+    });
+
     navigate("/occasions");
   };
 
-  const handleSubmit = (values: Occasion): void => {
-    updateOccasion(values);
+  const handleSubmit = (data: Occasion): void => {
+    const newOccasion = { ...data, userId: userId as string };
+    createOccasion(newOccasion);
   };
 
   return (
-    <div className="occasion-details w-full grow">
+    <div className="create-occasion w-full grow">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
-        Occasion Details
+        Create Occasion
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
@@ -152,11 +145,39 @@ export default function OccasionDetailPage() {
             control={form.control}
             name="deliveryDate"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>Delivery Date</FormLabel>
-                <FormControl>
-                  <Input placeholder="YYYY-MM-DD" {...field} />
-                </FormControl>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-[240px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          formatISO(field.value, {
+                            representation: "date",
+                          }).toString()
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={new Date(field.value)}
+                      onSelect={field.onChange}
+                      disabled={(date) => date < new Date()}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
                 <FormMessage />
               </FormItem>
             )}
@@ -188,7 +209,7 @@ export default function OccasionDetailPage() {
             )}
           />
           <div className="flex space-x-3">
-            <Button type="submit">Update Occasion</Button>
+            <Button type="submit">Create Occasion</Button>
             <Button variant="link" asChild>
               <Link to="/occasions">Go Back</Link>
             </Button>

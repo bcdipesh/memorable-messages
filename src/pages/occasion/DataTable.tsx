@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -22,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -52,7 +54,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter emails..."
           value={
@@ -63,6 +65,11 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <Button variant="outline" size="icon" asChild>
+          <Link to="/occasions/create">
+            <PlusCircledIcon className="h-4 w-4" />
+          </Link>
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
