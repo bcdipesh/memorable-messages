@@ -59,6 +59,16 @@
       "deliveryDate": "2024-05-06",
       "message": "Test",
       "createdAt": "2024-05-05"
+    },
+    {
+      "id": "sdfsd",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5ds",
+      "occasionType": "Occasion",
+      "receiverEmail": "bcdipeshwork@gmail.com",
+      "deliveryMethod": "Email",
+      "deliveryDate": "2024-05-06",
+      "message": "Test",
+      "createdAt": "2024-05-05"
     }
   ]
 }

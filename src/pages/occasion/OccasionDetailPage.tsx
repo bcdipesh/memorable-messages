@@ -67,6 +67,10 @@ export default function OccasionDetailPage() {
         );
         const data: Occasion = await response.json();
 
+        if (data.userId !== userId) {
+          navigate("/occasions");
+        }
+
         setOccasion(data);
       };
 

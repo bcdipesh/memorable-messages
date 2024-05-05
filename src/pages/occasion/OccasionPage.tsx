@@ -20,7 +20,9 @@ export default function OccasionPage() {
 
     if (isLoaded && userId) {
       const getOccasion = async (): Promise<void> => {
-        const response = await fetch("http://localhost:3000/occasions");
+        const response = await fetch(
+          `http://localhost:3000/occasions?userId=${userId}`
+        );
         const data: Occasion[] = await response.json();
 
         setOccasions(data);
