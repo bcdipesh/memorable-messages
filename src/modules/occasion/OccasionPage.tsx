@@ -4,8 +4,8 @@ import { useAuth } from "@clerk/clerk-react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Occasion } from "@/api/types/occasion";
-import { columns } from "@/pages/occasion/columns";
-import { DataTable } from "@/pages/occasion/DataTable";
+import { columns } from "@/modules/occasion/components/columns";
+import { DataTable } from "@/modules/occasion/components/DataTable";
 import { Button } from "@/components/ui/button";
 
 export default function OccasionPage() {

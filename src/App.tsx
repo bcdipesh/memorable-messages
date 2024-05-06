@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Root from "@/pages/Root";
-import HomePage from "@/pages/HomePage";
-import SignInPage from "@/pages/SignInPage";
-import SignUpPage from "@/pages/SignUpPage";
-import TermsOfServicePage from "@/pages/TermsOfServicePage";
-import PrivacyPolicyPage from "@/pages/PrivacyPolicyPage";
-import OccasionPage from "@/pages/occasion/OccasionPage";
-import CreateOccasionPage from "@/pages/occasion/CreateOccasionPage";
-import OccasionDetailPage from "@/pages/occasion/OccasionDetailPage";
+import Root from "@/components/Root";
+import HomePage from "@/modules/home/HomePage";
+import SignInPage from "@/modules/auth/SignInPage";
+import SignUpPage from "@/modules/auth/SignUpPage";
+import TermsOfServicePage from "@/modules/termsOfservice/TermsOfServicePage";
+import PrivacyPolicyPage from "@/modules/privacyPolicy/PrivacyPolicyPage";
+import OccasionPage from "@/modules/occasion/OccasionPage";
+import CreateOccasionPage from "@/modules/occasion/CreateOccasionPage";
+import OccasionDetailPage from "@/modules/occasion/OccasionDetailPage";
 
 const router = createBrowserRouter([
   {
