@@ -6,9 +6,7 @@ import SignInPage from "@/modules/auth/SignInPage";
 import SignUpPage from "@/modules/auth/SignUpPage";
 import TermsOfService from "@/modules/termsOfservice/TermsOfService";
 import PrivacyPolicy from "@/modules/privacyPolicy/PrivacyPolicy";
-import Occasions from "@/modules/occasions/Occasions";
-import CreateOccasion from "@/modules/occasions/CreateOccasion";
-import OccasionDetail from "@/modules/occasions/OccasionDetail";
+import { OccasionsRoutes } from "@/modules/occasions/routes";
 
 const router = createBrowserRouter([
   {
@@ -35,18 +33,7 @@ const router = createBrowserRouter([
         path: "/privacy-policy",
         element: <PrivacyPolicy />,
       },
-      {
-        path: "/occasions",
-        element: <Occasions />,
-      },
-      {
-        path: "/occasions/create",
-        element: <CreateOccasion />,
-      },
-      {
-        path: "/occasions/:occasionId",
-        element: <OccasionDetail />,
-      },
+      ...OccasionsRoutes,
     ],
   },
 ]);
