@@ -4,11 +4,11 @@ import { useAuth } from "@clerk/clerk-react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Occasion } from "@/api/types/occasion";
-import { columns } from "@/modules/occasion/components/columns";
-import { DataTable } from "@/modules/occasion/components/DataTable";
+import { columns } from "@/modules/occasions/components/columns";
+import { DataTable } from "@/modules/occasions/components/DataTable";
 import { Button } from "@/components/ui/button";
 
-export default function OccasionPage() {
+export default function Occasions() {
   const [occasions, setOccasions] = useState<Occasion[]>([]);
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export default function OccasionPage() {
     }
 
     if (isLoaded && userId) {
-      const getOccasion = async (): Promise<void> => {
+      const getOccasions = async (): Promise<void> => {
         const response = await fetch(
           `http://localhost:3000/occasions?userId=${userId}`
         );
@@ -28,7 +28,7 @@ export default function OccasionPage() {
         setOccasions(data);
       };
 
-      getOccasion();
+      getOccasions();
     }
   }, [isLoaded]);
 

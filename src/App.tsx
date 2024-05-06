@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Root from "@/components/Root";
-import HomePage from "@/modules/home/HomePage";
+import Home from "@/modules/home/Home";
 import SignInPage from "@/modules/auth/SignInPage";
 import SignUpPage from "@/modules/auth/SignUpPage";
-import TermsOfServicePage from "@/modules/termsOfservice/TermsOfServicePage";
-import PrivacyPolicyPage from "@/modules/privacyPolicy/PrivacyPolicyPage";
-import OccasionPage from "@/modules/occasion/OccasionPage";
-import CreateOccasionPage from "@/modules/occasion/CreateOccasionPage";
-import OccasionDetailPage from "@/modules/occasion/OccasionDetailPage";
+import TermsOfService from "@/modules/termsOfservice/TermsOfService";
+import PrivacyPolicy from "@/modules/privacyPolicy/PrivacyPolicy";
+import Occasions from "@/modules/occasions/Occasions";
+import CreateOccasion from "@/modules/occasions/CreateOccasion";
+import OccasionDetail from "@/modules/occasions/OccasionDetail";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <Home />,
       },
       {
         path: "/sign-in/*",
@@ -29,23 +29,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/terms-of-service",
-        element: <TermsOfServicePage />,
+        element: <TermsOfService />,
       },
       {
         path: "/privacy-policy",
-        element: <PrivacyPolicyPage />,
+        element: <PrivacyPolicy />,
       },
       {
         path: "/occasions",
-        element: <OccasionPage />,
+        element: <Occasions />,
       },
       {
         path: "/occasions/create",
-        element: <CreateOccasionPage />,
+        element: <CreateOccasion />,
       },
       {
         path: "/occasions/:occasionId",
-        element: <OccasionDetailPage />,
+        element: <OccasionDetail />,
       },
     ],
   },

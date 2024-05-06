@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function TermsOfServicePage() {
+export default function TermsOfService() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

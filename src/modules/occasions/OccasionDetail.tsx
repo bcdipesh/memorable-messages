@@ -34,7 +34,7 @@ const formSchema = z.object({
   createdAt: z.string().date("Invalid date for Create At."),
 });
 
-export default function OccasionDetailPage() {
+export default function OccasionDetail() {
   const [occasion, setOccasion] = useState<Occasion | null>(null);
   const { occasionId } = useParams();
   const { userId, isLoaded } = useAuth();
