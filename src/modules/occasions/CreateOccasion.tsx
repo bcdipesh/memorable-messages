@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@clerk/clerk-react";
 import { ReloadIcon, CalendarIcon } from "@radix-ui/react-icons";
 
-import type { Occasion } from "@/api/types/occasion";
+import { formSchema } from "@/modules/occasions/api/createOccasionSchema";
 
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
@@ -29,23 +29,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-const formSchema = z.object({
-  occasionType: z.string().min(1, "Please provide a occasion type."),
-  receiverEmail: z.string().email("Please provide a valid email address."),
-  deliveryMethod: z.string().min(1, "Invalid Delivery Method."),
-  deliveryDate: z
-    .string()
-    .date("Please provide a valid date in YYYY-MM-DD format.")
-    .or(z.date()),
-  message: z.string().min(1, "Please provide a message you wish to send."),
-  createdAt: z.string().date("Invalid date for Create At."),
-});
-
 export default function CreateOccasion() {
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
 
-  const form = useForm<Occasion>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       occasionType: "",
@@ -74,7 +62,9 @@ export default function CreateOccasion() {
     );
   }
 
-  const createOccasion = async (newOccasion: Occasion): Promise<void> => {
+  const createOccasion = async (
+    newOccasion: z.infer<typeof formSchema>
+  ): Promise<void> => {
     await fetch("http://localhost:3000/occasions", {
       method: "POST",
       headers: {
@@ -90,7 +80,7 @@ export default function CreateOccasion() {
     navigate("/occasions");
   };
 
-  const handleSubmit = (data: Occasion): void => {
+  const handleSubmit = (data: z.infer<typeof formSchema>): void => {
     const newOccasion = { ...data, userId: userId as string };
     createOccasion(newOccasion);
   };

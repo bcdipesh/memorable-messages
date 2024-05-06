@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { toast } from "sonner";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@clerk/clerk-react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
-import type { Occasion } from "@/api/types/occasion";
+import { formSchema } from "@/modules/occasions/api/updateOccasionSchema";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -21,26 +21,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-const formSchema = z.object({
-  id: z.string().min(1, "Invalid ID."),
-  userId: z.string().min(1, "Invalid User ID."),
-  occasionType: z.string().min(1, "Please provide a occasion type."),
-  receiverEmail: z.string().email("Please provide a valid email address."),
-  deliveryMethod: z.string().min(1, "Invalid Delivery Method."),
-  deliveryDate: z
-    .string()
-    .date("Please provide a valid date in YYYY-MM-DD format."),
-  message: z.string().min(1, "Please provide a message you wish to send."),
-  createdAt: z.string().date("Invalid date for Create At."),
-});
-
 export default function OccasionDetail() {
-  const [occasion, setOccasion] = useState<Occasion | null>(null);
+  const [occasion, setOccasion] = useState<z.infer<typeof formSchema> | null>(
+    null
+  );
   const { occasionId } = useParams();
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
 
-  const form = useForm<Occasion>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       id: "",
@@ -52,7 +41,7 @@ export default function OccasionDetail() {
       message: "",
       createdAt: "",
     },
-    values: occasion as Occasion,
+    values: occasion as z.infer<typeof formSchema>,
   });
 
   useEffect(() => {
@@ -65,7 +54,7 @@ export default function OccasionDetail() {
         const response = await fetch(
           `http://localhost:3000/occasions/${occasionId}`
         );
-        const data: Occasion = await response.json();
+        const data: z.infer<typeof formSchema> = await response.json();
 
         if (data.userId !== userId) {
           navigate("/occasions");
@@ -89,7 +78,9 @@ export default function OccasionDetail() {
     );
   }
 
-  const updateOccasion = async (updatedData: Occasion): Promise<void> => {
+  const updateOccasion = async (
+    updatedData: z.infer<typeof formSchema>
+  ): Promise<void> => {
     await fetch(`http://localhost:3000/occasions/${occasionId}`, {
       method: "PUT",
       headers: {
@@ -102,7 +93,7 @@ export default function OccasionDetail() {
     navigate("/occasions");
   };
 
-  const handleSubmit = (values: Occasion): void => {
+  const handleSubmit = (values: z.infer<typeof formSchema>): void => {
     updateOccasion(values);
   };
 
