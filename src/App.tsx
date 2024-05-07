@@ -6,6 +6,8 @@ import SignInPage from "@/modules/auth/SignInPage";
 import SignUpPage from "@/modules/auth/SignUpPage";
 import TermsOfService from "@/modules/termsOfservice/TermsOfService";
 import PrivacyPolicy from "@/modules/privacyPolicy/PrivacyPolicy";
+import NotFound from "@/modules/notFound/NotFound";
+
 import { OccasionsRoutes } from "@/modules/occasions/routes";
 
 const router = createBrowserRouter([
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
         element: <PrivacyPolicy />,
       },
       ...OccasionsRoutes,
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
 ]);

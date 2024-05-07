@@ -56,6 +56,11 @@ export default function OccasionDetail() {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/occasions/${occasionId}`
         );
+
+        if (!response.ok) {
+          navigate("/not-found");
+        }
+
         const data: z.infer<typeof formSchema> = await response.json();
 
         if (data.userId !== userId) {
