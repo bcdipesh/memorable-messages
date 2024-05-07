@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="home grid space-y-10 md:mt-0 md:grid-cols-2 md:gap-x-6 md:space-y-0">
       <div className="flex flex-col space-y-6">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl my-6">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
           {isLoaded &&
             !isSignedIn &&
             "Capture life's precious moments with heartfelt messages that last."}
