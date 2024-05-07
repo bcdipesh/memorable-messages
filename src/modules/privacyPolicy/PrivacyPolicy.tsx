@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
 export default function PrivacyPolicy() {
+  document.title = "Memorable Messages | Privacy Policy";
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

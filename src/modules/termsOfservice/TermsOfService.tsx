@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
 export default function TermsOfService() {
+  document.title = "Memorable Messages | Terms of Service";
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

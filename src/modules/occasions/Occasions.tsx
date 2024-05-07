@@ -9,6 +9,8 @@ import { DataTable } from "@/modules/occasions/components/DataTable";
 import { Button } from "@/components/ui/button";
 
 export default function Occasions() {
+  document.title = "Memorable Messages | Occasions";
+
   const [occasions, setOccasions] = useState<Occasion[]>([]);
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();

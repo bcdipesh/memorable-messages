@@ -48,7 +48,7 @@ export default function Home() {
         )}
         {isLoaded && isSignedIn && (
           <Button asChild className="w-fit">
-            <Link to="/occasions">Create</Link>
+            <Link to="/occasions">View my occasions</Link>
           </Button>
         )}
       </div>

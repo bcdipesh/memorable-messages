@@ -22,6 +22,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function OccasionDetail() {
+  document.title = "Memorable Messages | Occasion Details";
+
   const [occasion, setOccasion] = useState<z.infer<typeof formSchema> | null>(
     null
   );

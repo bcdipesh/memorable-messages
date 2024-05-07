@@ -30,6 +30,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function CreateOccasion() {
+  document.title = "Memorable Messages | Create Occasions";
+
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
 
