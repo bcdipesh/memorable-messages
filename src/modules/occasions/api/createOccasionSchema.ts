@@ -7,7 +7,7 @@ export const formSchema = z.object({
   deliveryDate: z
     .string()
     .date("Please provide a valid date in YYYY-MM-DD format.")
-    .or(z.date()),
+    .or(z.date().transform((val) => val.toISOString().split("T")[0])),
   message: z.string().min(1, "Please provide a message you wish to send."),
   createdAt: z.string().date("Invalid date for Create At."),
 });
