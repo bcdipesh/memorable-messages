@@ -65,7 +65,7 @@ export default function CreateOccasion() {
   const createOccasion = async (
     newOccasion: z.infer<typeof formSchema>
   ): Promise<void> => {
-    await fetch("http://localhost:3000/occasions", {
+    await fetch(`${import.meta.env.VITE_API_URL}/occasions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -52,7 +52,7 @@ export const columns: ColumnDef<Occasion>[] = [
 
       const deleteOccasion = async (): Promise<void> => {
         const response = await fetch(
-          `http://localhost:3000/occasions/${occasion.id}`,
+          `${import.meta.env.VITE_API_URL}/occasions/${occasion.id}`,
           {
             method: "DELETE",
           }

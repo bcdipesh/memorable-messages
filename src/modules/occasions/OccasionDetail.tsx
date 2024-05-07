@@ -52,7 +52,7 @@ export default function OccasionDetail() {
     if (isLoaded && userId) {
       const fetchOccasion = async (): Promise<void> => {
         const response = await fetch(
-          `http://localhost:3000/occasions/${occasionId}`
+          `${import.meta.env.VITE_API_URL}/occasions/${occasionId}`
         );
         const data: z.infer<typeof formSchema> = await response.json();
 
@@ -81,7 +81,7 @@ export default function OccasionDetail() {
   const updateOccasion = async (
     updatedData: z.infer<typeof formSchema>
   ): Promise<void> => {
-    await fetch(`http://localhost:3000/occasions/${occasionId}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/occasions/${occasionId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
