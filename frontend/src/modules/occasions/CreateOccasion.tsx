@@ -65,7 +65,7 @@ export default function CreateOccasion() {
   }
 
   const createOccasion = async (
-    newOccasion: z.infer<typeof formSchema>
+    newOccasion: z.infer<typeof formSchema>,
   ): Promise<void> => {
     await fetch(`${import.meta.env.VITE_API_URL}/occasions`, {
       method: "POST",
@@ -75,12 +75,17 @@ export default function CreateOccasion() {
       body: JSON.stringify(newOccasion),
     });
 
-    await fetch("http://localhost:5000/schedule-email", {
+    await fetch("http://localhost:3001/schedule-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newOccasion),
+      body: JSON.stringify({
+        email: newOccasion.receiverEmail,
+        subject: newOccasion.occasionType,
+        message: newOccasion.message,
+        date: newOccasion.deliveryDate,
+      }),
     });
 
     toast.success("Occasion created successfully.", {
@@ -154,7 +159,7 @@ export default function CreateOccasion() {
                         variant="outline"
                         className={cn(
                           "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
+                          !field.value && "text-muted-foreground",
                         )}
                       >
                         {field.value ? (
