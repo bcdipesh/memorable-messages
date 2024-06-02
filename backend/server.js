@@ -1,75 +1,85 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const nodemailer = require("nodemailer");
-const cron = require("node-cron");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+const cron = require("node-cron");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
-
-// Use cors middleware
 app.use(cors());
-
 app.use(bodyParser.json());
 
-// In-memory storage for scheduled tasks
-const scheduledEmails = [];
-
-// Health endpoint
-app.get("/health", (req, res) => {
-  return res.status(200).send("Server is up and running.");
+// Configure Nodemailer to use Gmail
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
 });
 
-// Email scheduling endpoint
-app.post("/schedule-email", (req, res) => {
-  const { occasionType, receiverEmail, deliveryDate, message } = req.body;
-
-  const date = new Date(deliveryDate);
-  //   const now = new Date();
-  //   if (date <= now) {
-  //     return res.status(400).send("Scheduled time must be in the future");
-  //   }
-
-  // Schedule the email using node-cron
-  const cronTime = `${date.getMinutes()} ${date.getHours()} ${date.getDate()} ${
-    date.getMonth() + 1
-  } *`;
-  const task = cron.schedule(cronTime, () => {
-    sendEmail(receiverEmail, occasionType, message);
-    task.stop();
-  });
-
-  scheduledEmails.push({ receiverEmail, message, deliveryDate, task });
-
-  res.send("Email scheduled successfully");
-});
-
-// Email sending function using nodemailer
-const sendEmail = (receiverEmail, occasionType, message) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "bcdipeshwork@gmail.com",
-      pass: "nwer fosx pyeb whpu",
-    },
-  });
-
+// Helper function to send email
+const sendEmail = async (emailJob) => {
   const mailOptions = {
-    from: "memorable-messages@gmail.com",
-    to: receiverEmail,
-    subject: `Happy ${occasionType}`,
-    text: message,
+    from: process.env.GMAIL_USER,
+    to: emailJob.email,
+    subject: emailJob.subject,
+    text: emailJob.message,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log("Error sending email:", error);
-    } else {
-      console.log("Email sent:", info.response);
-    }
-  });
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Email sent to ${emailJob.email}`);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
 };
 
-// Start the server
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+let scheduledEmails = [];
+
+// Endpoint to schedule email
+app.post("/schedule-email", async (req, res) => {
+  const { email, subject, message, date } = req.body;
+  const sendTime = new Date(date);
+
+  if (sendTime <= new Date()) {
+    // If the scheduled time is in the past or immediate, send the email immediately
+    await sendEmail({ email, subject, message, sendTime });
+    return res.send(
+      "Email sent immediately as the scheduled time was in the past or now.",
+    );
+  }
+
+  // Add email job to the schedule
+  scheduledEmails.push({ email, subject, message, sendTime });
+
+  res.send("Email scheduled successfully.");
+});
+
+// Cron job to check and send scheduled emails
+cron.schedule("* * * * *", async () => {
+  const now = new Date();
+  const pendingEmails = [];
+
+  for (const emailJob of scheduledEmails) {
+    if (emailJob.sendTime <= now) {
+      await sendEmail(emailJob);
+    } else {
+      pendingEmails.push(emailJob);
+    }
+  }
+
+  // Log pending and scheduledEmails
+  console.log("Scheduled Emails:", scheduledEmails);
+  console.log("Pending Emails:", pendingEmails);
+
+  // Update the scheduledEmails array with pending emails
+  scheduledEmails = pendingEmails;
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
