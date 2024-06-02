@@ -75,6 +75,14 @@ export default function CreateOccasion() {
       body: JSON.stringify(newOccasion),
     });
 
+    await fetch("http://localhost:5000/schedule-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newOccasion),
+    });
+
     toast.success("Occasion created successfully.", {
       description: `${newOccasion.occasionType}, ${newOccasion.deliveryDate}`,
     });

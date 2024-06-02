@@ -69,6 +69,16 @@
       "deliveryDate": "2024-05-06",
       "message": "Test",
       "createdAt": "2024-05-05"
+    },
+    {
+      "id": "a455",
+      "occasionType": "Test schedule2",
+      "receiverEmail": "bcdipeshwork@gmail.com",
+      "deliveryMethod": "Email",
+      "deliveryDate": "2024-05-25",
+      "message": "Testing email schedule",
+      "createdAt": "2024-05-25",
+      "userId": "user_2fhJ7C3cELpVkJ2xTXYSzbja5dt"
     }
   ]
 }
