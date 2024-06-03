@@ -75,7 +75,7 @@ export const columns: ColumnDef<Occasion>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => navigator.clipboard.writeText(occasion.id)}
+              onClick={() => navigator.clipboard.writeText("" + occasion.id)}
             >
               Copy occasion ID
             </DropdownMenuItem>
