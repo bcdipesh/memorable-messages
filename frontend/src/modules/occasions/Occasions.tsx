@@ -23,7 +23,7 @@ export default function Occasions() {
     if (isLoaded && userId) {
       const getOccasions = async (): Promise<void> => {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/occasions?userId=${userId}`
+          `${import.meta.env.VITE_API_URL}/occasions?userId=${userId}`,
         );
         const data: Occasion[] = await response.json();
 

@@ -25,7 +25,7 @@ export default function OccasionDetail() {
   document.title = "Memorable Messages | Occasion Details";
 
   const [occasion, setOccasion] = useState<z.infer<typeof formSchema> | null>(
-    null
+    null,
   );
   const { occasionId } = useParams();
   const { userId, isLoaded } = useAuth();
@@ -34,14 +34,13 @@ export default function OccasionDetail() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: "",
-      userId: "",
-      occasionType: "",
-      receiverEmail: "",
-      deliveryMethod: "",
-      deliveryDate: "",
+      user_id: "",
+      occasion_type: "",
+      receiver_email: "",
+      delivery_method: "",
+      delivery_date: "",
       message: "",
-      createdAt: "",
+      created_at: "",
     },
     values: occasion as z.infer<typeof formSchema>,
   });
@@ -54,7 +53,7 @@ export default function OccasionDetail() {
     if (isLoaded && userId) {
       const fetchOccasion = async (): Promise<void> => {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/occasions/${occasionId}`
+          `${import.meta.env.VITE_API_URL}/occasions/${occasionId}`,
         );
 
         if (!response.ok) {
@@ -63,7 +62,7 @@ export default function OccasionDetail() {
 
         const data: z.infer<typeof formSchema> = await response.json();
 
-        if (data.userId !== userId) {
+        if (data.user_id !== userId) {
           navigate("/occasions");
         }
 
@@ -86,7 +85,7 @@ export default function OccasionDetail() {
   }
 
   const updateOccasion = async (
-    updatedData: z.infer<typeof formSchema>
+    updatedData: z.infer<typeof formSchema>,
   ): Promise<void> => {
     await fetch(`${import.meta.env.VITE_API_URL}/occasions/${occasionId}`, {
       method: "PUT",
@@ -113,7 +112,7 @@ export default function OccasionDetail() {
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="occasionType"
+            name="occasion_type"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Occasion Type</FormLabel>
@@ -126,7 +125,7 @@ export default function OccasionDetail() {
           />
           <FormField
             control={form.control}
-            name="receiverEmail"
+            name="receiver_email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Receiver Email</FormLabel>
@@ -139,7 +138,7 @@ export default function OccasionDetail() {
           />
           <FormField
             control={form.control}
-            name="deliveryMethod"
+            name="delivery_method"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Delivery Method</FormLabel>
@@ -152,7 +151,7 @@ export default function OccasionDetail() {
           />
           <FormField
             control={form.control}
-            name="deliveryDate"
+            name="delivery_date"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Delivery Date</FormLabel>
@@ -178,7 +177,7 @@ export default function OccasionDetail() {
           />
           <FormField
             control={form.control}
-            name="createdAt"
+            name="created_at"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Created At</FormLabel>

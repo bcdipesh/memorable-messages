@@ -58,10 +58,13 @@ export function DataTable<TData, TValue>({
         <Input
           placeholder="Filter emails..."
           value={
-            (table.getColumn("receiverEmail")?.getFilterValue() as string) ?? ""
+            (table.getColumn("receiver_email")?.getFilterValue() as string) ??
+            ""
           }
           onChange={(event) =>
-            table.getColumn("receiverEmail")?.setFilterValue(event.target.value)
+            table
+              .getColumn("receiver_email")
+              ?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -86,7 +89,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -105,7 +108,7 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}

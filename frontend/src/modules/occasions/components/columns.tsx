@@ -16,11 +16,11 @@ import {
 
 export const columns: ColumnDef<Occasion>[] = [
   {
-    accessorKey: "occasionType",
+    accessorKey: "occasion_type",
     header: "Occasion Type",
   },
   {
-    accessorKey: "receiverEmail",
+    accessorKey: "receiver_email",
     header: ({ column }) => {
       return (
         <Button
@@ -34,15 +34,15 @@ export const columns: ColumnDef<Occasion>[] = [
     },
   },
   {
-    accessorKey: "deliveryMethod",
+    accessorKey: "delivery_method",
     header: "Delivery Method",
   },
   {
-    accessorKey: "deliveryDate",
+    accessorKey: "delivery_date",
     header: "Delivery Date",
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "created_at",
     header: "Created At",
   },
   {
@@ -55,7 +55,7 @@ export const columns: ColumnDef<Occasion>[] = [
           `${import.meta.env.VITE_API_URL}/occasions/${occasion.id}`,
           {
             method: "DELETE",
-          }
+          },
         );
 
         if (response.ok) {

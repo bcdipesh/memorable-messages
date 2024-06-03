@@ -38,12 +38,12 @@ export default function CreateOccasion() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      occasionType: "",
-      receiverEmail: "",
-      deliveryMethod: "Email",
-      deliveryDate: new Date().toISOString().split("T")[0],
+      occasion_type: "",
+      receiver_email: "",
+      delivery_method: "Email",
+      delivery_date: new Date().toISOString().split("T")[0],
       message: "",
-      createdAt: new Date().toISOString().split("T")[0],
+      created_at: new Date().toISOString().split("T")[0],
     },
   });
 
@@ -75,28 +75,28 @@ export default function CreateOccasion() {
       body: JSON.stringify(newOccasion),
     });
 
-    await fetch("http://localhost:3001/schedule-email", {
+    await fetch(`${import.meta.env.VITE_API_URL}/schedule-email`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: newOccasion.receiverEmail,
-        subject: newOccasion.occasionType,
+        email: newOccasion.receiver_email,
+        subject: newOccasion.occasion_type,
         message: newOccasion.message,
-        date: newOccasion.deliveryDate,
+        date: newOccasion.delivery_date,
       }),
     });
 
     toast.success("Occasion created successfully.", {
-      description: `${newOccasion.occasionType}, ${newOccasion.deliveryDate}`,
+      description: `${newOccasion.occasion_type}, ${newOccasion.delivery_date}`,
     });
 
     navigate("/occasions");
   };
 
   const handleSubmit = (data: z.infer<typeof formSchema>): void => {
-    const newOccasion = { ...data, userId: userId as string };
+    const newOccasion = { ...data, user_id: userId as string };
     createOccasion(newOccasion);
   };
 
@@ -109,7 +109,7 @@ export default function CreateOccasion() {
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="occasionType"
+            name="occasion_type"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Occasion Type</FormLabel>
@@ -122,7 +122,7 @@ export default function CreateOccasion() {
           />
           <FormField
             control={form.control}
-            name="receiverEmail"
+            name="receiver_email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Receiver Email</FormLabel>
@@ -135,7 +135,7 @@ export default function CreateOccasion() {
           />
           <FormField
             control={form.control}
-            name="deliveryMethod"
+            name="delivery_method"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Delivery Method</FormLabel>
@@ -148,7 +148,7 @@ export default function CreateOccasion() {
           />
           <FormField
             control={form.control}
-            name="deliveryDate"
+            name="delivery_date"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel>Delivery Date</FormLabel>
@@ -202,7 +202,7 @@ export default function CreateOccasion() {
           />
           <FormField
             control={form.control}
-            name="createdAt"
+            name="created_at"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Created At</FormLabel>

@@ -1,10 +1,10 @@
 export interface Occasion {
   id: string;
-  userId: string;
-  occasionType: string;
-  receiverEmail: string;
-  deliveryMethod: string;
-  deliveryDate: string;
+  user_id: string;
+  occasion_type: string;
+  receiver_email: string;
+  delivery_method: string;
+  delivery_date: string;
   message: string;
-  createdAt: string;
+  created_at: string;
 }
