@@ -1,5 +1,5 @@
 export interface Occasion {
-  id: string;
+  id: number;
   user_id: string;
   occasion_type: string;
   receiver_email: string;
