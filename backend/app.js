@@ -17,6 +17,11 @@ app.use(morgan("tiny"));
 
 app.use("/occasions", occasionRoutes);
 
+// Endpoint to check health
+app.get("/health", (req, res, next) =>
+  res.json({ message: "Server is up and running." }),
+);
+
 let scheduledEmails = [];
 
 // Endpoint to schedule email
