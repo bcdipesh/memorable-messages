@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
+import { format } from "date-fns";
 
 import type { Occasion } from "@/api/types/occasion";
 
@@ -40,10 +41,12 @@ export const columns: ColumnDef<Occasion>[] = [
   {
     accessorKey: "delivery_date",
     header: "Delivery Date",
+    cell: ({ row }) => format(row.original.delivery_date, "PPP"),
   },
   {
     accessorKey: "created_at",
     header: "Created At",
+    cell: ({ row }) => format(row.original.created_at, "PPP"),
   },
   {
     id: "actions",
