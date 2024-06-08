@@ -63,6 +63,7 @@ export const columns: ColumnDef<Occasion>[] = [
 
         if (response.ok) {
           toast.success("Occasion successfully deleted.");
+          location.reload();
         }
       };
 
@@ -78,7 +79,10 @@ export const columns: ColumnDef<Occasion>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => navigator.clipboard.writeText("" + occasion.id)}
+              onClick={() => {
+                navigator.clipboard.writeText("" + occasion.id);
+                toast.success("ID successfully copied.");
+              }}
             >
               Copy occasion ID
             </DropdownMenuItem>
