@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { formatISO } from "date-fns";
+import { format } from "date-fns";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@clerk/clerk-react";
@@ -41,9 +41,9 @@ export default function CreateOccasion() {
       occasion_type: "",
       receiver_email: "",
       delivery_method: "Email",
-      delivery_date: new Date().toISOString().split("T")[0],
+      delivery_date: new Date(),
       message: "",
-      created_at: new Date().toISOString().split("T")[0],
+      created_at: new Date(),
     },
   });
 
@@ -163,9 +163,7 @@ export default function CreateOccasion() {
                         )}
                       >
                         {field.value ? (
-                          formatISO(field.value, {
-                            representation: "date",
-                          }).toString()
+                          format(field.value, "PPP")
                         ) : (
                           <span>Pick a date</span>
                         )}
@@ -176,7 +174,7 @@ export default function CreateOccasion() {
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                       mode="single"
-                      selected={new Date(field.value)}
+                      selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) => date < new Date()}
                       initialFocus
@@ -207,7 +205,11 @@ export default function CreateOccasion() {
               <FormItem>
                 <FormLabel>Created At</FormLabel>
                 <FormControl>
-                  <Input placeholder="Created At" {...field} disabled />
+                  <Input
+                    placeholder="Created At"
+                    value={format(field.value, "PPP")}
+                    disabled
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
