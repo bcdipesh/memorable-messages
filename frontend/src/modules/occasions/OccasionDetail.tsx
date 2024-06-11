@@ -38,9 +38,9 @@ export default function OccasionDetail() {
       occasion_type: "",
       receiver_email: "",
       delivery_method: "",
-      delivery_date: "",
+      delivery_date: new Date(),
       message: "",
-      created_at: "",
+      created_at: new Date(),
     },
     values: occasion as z.infer<typeof formSchema>,
   });
